@@ -1,0 +1,130 @@
+{% extends "portail/page.html" %}
+{% load i18n %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% load embed %}
+
+{% block styles %}
+    {{ block.super }}
+    <style>
+        .legende_grille {
+            padding: 2px;
+        }
+        .legende_grille ul {
+            margin-bottom: 0px;
+        }
+        .legende_grille li {
+            display: inline;
+            white-space: nowrap;
+            margin-right: 20px;
+        }
+    </style>
+{% endblock styles %}
+
+
+{% block scripts %}
+    {{ block.super }}
+    <script type="text/javascript" src="{% static 'lib/bootbox/bootbox.min.js' %}"></script>
+    <script>
+        var dict_options = null;
+        function Get_periode() {return null;};
+        function Get_individus() {return null;};
+        function Get_groupes() {return null;};
+        function Get_classes() {return null;};
+        function Get_options() {return null;};
+        function Get_mode_parametres() {return null;};
+    </script>
+{% endblock scripts %}
+
+
+{% block contenu_page %}
+
+    {# Texte d'introduction #}
+    {% if parametres_portail.reservations_intro_planning %}
+        <div class="d-print-none" style="margin-bottom: 20px;">
+            <i class="fa fa-info-circle margin-r-5"></i>{{ parametres_portail.reservations_intro_planning }}
+        </div>
+    {% endif %}
+
+    {# Lien de retour vers liste des périodes #}
+	<div class="d-print-none" style="margin-bottom: 10px;">
+        <a id="retour_reservations" href="{% url 'portail_reservations' %}"><i class="fa fa-arrow-circle-o-left"></i> {% blocktrans %}Revenir à la liste des périodes{% endblocktrans %}</a>
+	</div>
+
+    {# Entête de l'individu #}
+    <div class="card card-widget widget-user">
+        <div class="widget-user-header bg-lightblue" style="height: 110px;">
+            <h3 class="widget-user-username">{{ data.individu.nom }} {{ data.individu.prenom }}</h3>
+        </div>
+        <div class="widget-user-image" style="top: 60px;">
+            <img class="img-circle elevation-1" src="{{ data.individu.Get_photo }}" alt="Photo">
+        </div>
+        <div class="card-footer" style="padding-top: 40px;">
+            <div class="row">
+                <div class="col-sm-4 border-right">
+                    <div class="description-block">
+                        <h5 class="description-header"><small>{% trans "Activité" %}</small></h5>
+                        <span class="description-text text-lightblue">{{ data.periode_reservation.activite.nom }}</span>
+                    </div>
+                </div>
+                <div class="col-sm-4 border-right">
+                    <div class="description-block">
+                        <h5 class="description-header"><small>{% trans "Période" %}</small></h5>
+                        <span class="description-text text-lightblue">{{ data.periode_reservation.nom }}</span>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="description-block">
+                        <h5 class="description-header"><small>{% trans "Dates" %}</small></h5>
+                        <span class="description-text text-lightblue">{% trans "Du" %} {{ data.periode_reservation.date_debut|date:"d/m/Y" }} {% trans "au" %} {{ data.periode_reservation.date_fin|date:"d/m/Y" }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    {# Grilles des réservations #}
+    <div class="row">
+        <div class="col-md-12" >
+            <div class="card">
+
+                {# Grille des consommations #}
+                <div class="card-body">
+
+                    {# Texte d'introduction de la période #}
+                    {{ data.periode_reservation }}
+
+                    {% if data.periode_reservation.introduction %}
+                        <div class="d-print-none" style="margin-bottom: 10px;">
+                            <i class="fa fa-info-circle margin-r-5"></i>{{ data.periode_reservation.introduction }}
+                        </div>
+                    {% endif %}
+
+                    {# Tableau de la grille #}
+                    {% include "consommations/grille_tableau.html" %}
+
+                    {# Légende de la grille #}
+                    <div class="legende_grille"><small>
+                        <ul class="list-unstyled">
+                            <li><i class="fa fa-square margin-r-5" style="color: #FF9E1E;"></i>{% trans "Réservation" %}</li>
+                            <li><i class="fa fa-square margin-r-5" style="color: #abcbff;"></i>{% trans "Attente" %}</li>
+                            <li><i class="fa fa-square margin-r-5" style="color: rgba(227, 254, 219, 0.73);"></i>{% trans "Disponible" %}</li>
+                            <li><i class="fa fa-square margin-r-5" style="color: #FEFCDB;"></i>{% blocktrans %}Dernières places{% endblocktrans %}</li>
+                            <li><i class="fa fa-square margin-r-5" style="color: rgba(247, 172, 178, 0.36);"></i>{% trans "Complet" %}</li>
+                            <li><i class="fa fa-check-circle-o text-green margin-r-5"></i>{% trans "Présent" %}</li>
+                            <li><i class="fa fa-lock text-red margin-r-5"></i>{% blocktrans %}Non modifiable{% endblocktrans %}</li>
+                        </ul>
+                    </small></div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    {% include 'consommations/grille_saisie_horaires.html' %}
+    {% include 'consommations/grille_saisie_quantite.html' %}
+    {% include 'consommations/grille_appliquer_semaine_type.html' %}
+
+{% endblock contenu_page %}

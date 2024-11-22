@@ -1,0 +1,89 @@
+{% load static %}
+
+<div class="modal fade" id="{% block modal_id %}modal_pdf{% endblock %}" role="dialog" aria-labelledby="titre_pdf">
+    <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-content">
+
+            <div class="modal-header {% block modal_theme %}bg-lightblue{% endblock %}">
+                <h5 class="modal-title" id="titre_pdf"><strong>{% block modal_titre %}Aperçu PDF{% endblock %}</strong></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <div id="modal_erreurs" class="text-red"></div>
+                <div id="lecteur_pdf">
+                    <embed id="fichier_pdf" src="" frameborder="0" width="100%" height="600px" cache='false'>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+{# Lien de téléchargement direct #}
+<a id="download" download></a>
+
+<script>
+
+    // Affichage du PDF
+    function charge_pdf(donnees={}, telechargement=false) {
+        if ( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+            // Si mobile, on passe en mode téléchargement
+            telechargement = true;
+        }
+        if (telechargement === false) {
+            var ctrl = document.getElementById("fichier_pdf");
+            var clone = ctrl.cloneNode(true);
+            clone.setAttribute('src', '{{ MEDIA_URL }}' + donnees.nom_fichier);
+            ctrl.parentNode.replaceChild(clone, ctrl)
+            $('#modal_pdf').modal('show');
+        } else {
+            window.location = "{{ MEDIA_URL }}" + donnees.nom_fichier;
+            // $("#download").attr("href", donnees.nom_fichier);
+            // document.getElementById("download").click();
+        }
+    };
+
+    // Envoi par Email
+    function envoyer_email(donnees={}, csrf_token='') {
+        if (csrf_token === '') {
+            csrf_token = "{{ csrf_token }}";
+        }
+        $.ajax({
+            type: "POST",
+            url: "{% url 'ajax_get_view_editeur_email' %}",
+            data: {
+                donnees: JSON.stringify(donnees),
+                csrfmiddlewaretoken: csrf_token,
+            },
+            datatype: "json",
+            success: function(data){
+                $('#div_editeur_emails').html(data);
+                $('#modal_editeur_emails').modal('show');
+            }
+        })
+    };
+
+    // Envoi par SMS
+    function envoyer_sms(donnees={}, csrf_token='') {
+        if (csrf_token === '') {
+            csrf_token = "{{ csrf_token }}";
+        }
+        $.ajax({
+            type: "POST",
+            url: "{% url 'ajax_get_view_editeur_sms' %}",
+            data: {
+                donnees: JSON.stringify(donnees),
+                csrfmiddlewaretoken: csrf_token,
+            },
+            datatype: "json",
+            success: function(data){
+                $('#div_editeur_sms').html(data);
+                $('#modal_editeur_sms').modal('show');
+            }
+        })
+    };
+
+</script>

@@ -1,0 +1,38 @@
+{% load i18n %}
+<style>
+    #table-prestations td, #table-prestations th {
+        vertical-align: middle;
+        text-align: center;
+    }
+</style>
+
+<table id="table-prestations" class="table table-bordered">
+    <thead>
+        <tr>
+            <th>{% trans "Date" %}</th>
+            <th>{% trans "Individu" %}</th>
+            <th>{% trans "Activité" %}</th>
+            <th>{% trans "Intitulé" %}</th>
+            <th>{% trans "Montant" %}</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for prestation in prestations %}
+            <tr>
+                <td>{{ prestation.date|date:"d/m/Y"|capfirst }}</td>
+                <td>{{ prestation.individu|default:"-" }}</td>
+                <td>{{ prestation.activite|default:"-" }}</td>
+                <td>{{ prestation.label }}</td>
+                <td>{{ prestation.montant|montant }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<ul>
+    <li>{% blocktrans %}Total de la facture{% endblocktrans %} : <b>{{ facture.total|montant }}</b></li>
+    {% if parametres_portail.facturation_afficher_solde_facture %}
+        <li>{% blocktrans %}Total déjà réglé{% endblocktrans %} : <b>{{ facture.Get_regle_actuel|montant }}</b></li>
+        <li>{% blocktrans %}Solde actuel{% endblocktrans %} : <b>{{ facture.solde_actuel|montant }}</b></li>
+    {% endif %}
+</ul>

@@ -1,0 +1,115 @@
+{% load crispy_forms_tags %}
+{% load static %}
+{% load embed %}
+
+
+{% block contenu_page %}
+
+    <div class="card card-outline">
+
+        <div class="card-header">
+            <h3 class="card-title"><i class="fa fa-history margin-r-5"></i> Suivi des réservations</h3>
+            <div class="card-tools">
+
+                <button type="button" id="bouton_maj_affichage_reservations" title="Actualiser l'affichage" class="btn btn-tool"><i class="fa fa-refresh"></i></button>
+
+                <div class="btn-group">
+                    <button href="#" class="btn btn-tool" title="Ajuster les options" data-toggle="dropdown"><i class="fa fa-gear"></i></button>
+                    <div id="choix_affichage" class="dropdown-menu dropdown-menu-right" role="menu">
+                        <li><h6 class="dropdown-header"><strong>Données</strong></h6></li>
+                        <a class="dropdown-item" style="padding-left: 22px;" href="#" id="selection_activites_reservations" title="Sélectionner les activités">Sélectionner les activités</a>
+                        <a class="dropdown-item" style="padding-left: 22px;" href="#" id="selection_periode_reservations" title="Sélectionner la période">Sélectionner la période</a>
+                    </div>
+                </div>
+
+                <button type="button" class="btn btn-tool" data-card-widget="maximize" title="Agrandir/Réduire"><i class="fa fa-expand"></i></button>
+                <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Réduire"><i class="fa fa-minus"></i></button>
+
+            </div>
+        </div>
+
+        <div>
+            <table id="table-suivi_reservations" class="table mb-0">
+            </table>
+        </div>
+
+    </div>
+
+    {# Ajout de la modal sélection des activités #}
+    <div id="div_modal_selection_activites_reservations"></div>
+
+    {# Ajout de la modal sélection de la période #}
+    <div id="div_modal_selection_periode_reservations"></div>
+
+<script>
+    $(document).ready(function() {
+
+        // Bouton MAJ affichage
+        $("#bouton_maj_affichage_reservations").on('click', function(event) {
+            event.preventDefault();
+            maj_affichage_reservations();
+        });
+
+        $("#selection_activites_reservations").on("click", function(event){
+            event.preventDefault();
+            $.ajax({
+                type: "POST",
+                url: "{% url 'ajax_reservations_get_form_activites' %}",
+                data: {
+                    activites: JSON.stringify(activites_reservations_json),
+                    csrfmiddlewaretoken: "{{ csrf_token }}",
+                },
+                success: function (data) {
+                    $("#div_modal_selection_activites_reservations").html(data);
+                    $('#modal_selection_activites_reservations').modal('show');
+                }
+            });
+        });
+
+        $("#selection_periode_reservations").on("click", function(event){
+            event.preventDefault();
+            $.ajax({
+                type: "POST",
+                url: "{% url 'ajax_reservations_get_form_periode' %}",
+                data: {
+                    periode_historique: periode_historique,
+                    periode_reservations: periode_reservations,
+                    csrfmiddlewaretoken: "{{ csrf_token }}",
+                },
+                success: function (data) {
+                    $("#div_modal_selection_periode_reservations").html(data);
+                    $('#modal_selection_periode_reservations').modal('show');
+                }
+            });
+        });
+
+        // MAJ de l'affichage au chargement de la page
+        maj_affichage_reservations();
+
+    });
+
+    function maj_affichage_reservations(update_parametres=false) {
+        var parametres = null;
+        if (update_parametres) {
+            parametres = {
+                activites: activites_reservations_json,
+                periode_historique: periode_historique,
+                periode_reservations: periode_reservations,
+            };
+        }
+        $.ajax({
+            type: "POST",
+            url: "{% url 'ajax_get_suivi_reservations' %}",
+            data: {
+                parametres: JSON.stringify(parametres),
+                csrfmiddlewaretoken: "{{ csrf_token }}",
+            },
+            success: function (data) {
+                $("#table-suivi_reservations").html(data);
+            }
+        });
+    };
+
+</script>
+
+{% endblock contenu_page %}

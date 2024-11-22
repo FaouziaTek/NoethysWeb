@@ -1,0 +1,1905 @@
+Version 1.2.6.3 (01/10/2024) :
+
+- Ajout de la prise en charge du tarif au choix pour les forfaits datés
+- Correction sur la suppression automatique des forfaits crédit
+
+Version 1.2.6.2 (29/09/2024) :
+
+- Ajout de la synthèse des déductions dans le menu Facturation
+- Ajout des montants de prestations dans la liste des déductions
+- Mise à jour de l'export vers Cloé
+- Adaptations pour Django 5
+- Correction de divers petits bugs
+
+Version 1.2.6.1 (20/09/2024) :
+
+- Ajout de l'option Afficher la facturation sur le planning du portail
+- Ajout attribution dernière école lors d'une inscription scolaire
+- Ajout de la saisie d'inscriptions par lot dans le menu Individus
+- Correction sur les classes des fiches de renseignements
+- Correction du total max dans le suivi des consommations
+
+Version 1.2.6.0 (05/09/2024) :
+
+- Ajout de la synthèse des locations dans le menu Locations
+- Ajout de la suppression des occurences d'une série de locations
+- Correction du formulaire de saisie d'une pièce sans individu associé
+- Correction de la saisie des mails dans l'option d'envoi des factures par email
+- Correction de l'enregistrement d'une pièce associée à une inscription sur le portail
+- Correction du widget de sélection d'une activité obsolète
+
+Version 1.2.5.9 (18/08/2024) :
+
+- Ajout de la procédure update_permissions
+
+Version 1.2.5.8 (17/08/2024) :
+
+- Ajout de la duplication des articles
+- Ajout des permissions Modifier sur les fiches familles et individus
+- Ajout de la liste des certifications dans le menu Individus
+- Amélioration du verrouillage des dépôts de règlements
+- Correction de l'enregistrement des adresses mails dans les abonnements aux services
+- Correction sur la liste des questionnaires quand réponse non textuelle
+- Correction de l'attribution des montants selon âge avec le tarif selon le nombre d'individus
+
+Version 1.2.5.7 (15/08/2024) :
+
+- Ajout de la saisie par lot des forfaits-crédits dans le menu Facturation
+- Ajout du total TVA dans les factures
+- Ajout de la purge auto de l'historique
+
+Version 1.2.5.6 (11/08/2024) :
+
+- Rétablissement de l'ancien format de la notification Payfip
+
+Version 1.2.5.5 (02/08/2024) :
+
+- Ajout de la commande de réinitialisation des dates de certification des fiches
+- Mise à jour du format de la notification de retour Payfip
+- Correction de la déventilation intempestive après la modification des heures facturées
+
+Version 1.2.5.4 (31/07/2024) :
+
+- Ajout de la duplication des classes
+- Améliorations diverses sur le planning des locations
+- Correction des heures par défaut sur les consommations de type unitaire
+- Correction de l'affichage des locations illimitées dans le planning des locations
+- Correction du tarif taux d'effort et QF
+
+Version 1.2.5.3 (19/07/2024) :
+
+- Ajout des règlements associés dans le détail des prestations de la fiche famille
+- Ajout de la commande admin Purger l'historique
+
+Version 1.2.5.2 (17/07/2024) :
+
+- Ajout des catégories de tarifs associées aux unités de consommation
+- Correction sur la fusion avec un integer dans l'envoi express d'un email
+- Correction de l'ordre des réponses de type texte dans les sondages
+- Correction de la prise en charge des emojis
+
+Version 1.2.5.1 (07/07/2024) :
+
+- Ajout du widget Suivi des achats pour le tableau de bord
+- Ajout du planning des achats dans le menu Comptabilité
+
+Version 1.2.5.0 (05/07/2024) :
+
+- Ajout de l'option Aucun dans les paramètres de la synthèse des prestations
+- Ajout de la pagination dans la liste des quotients
+- Correction de la saisie d'une inscription avec pièce obligatoire sur le portail
+- Correction du solde des factures lors de l'importation initiale
+- Correction du filtre rapide dans la liste des inscriptions à une activité
+
+Version 1.2.4.9 (03/07/2024) :
+
+- Ajout du prélèvement manuel
+- Ajout de l'envoi des emails avec BREVO
+- Ajout de l'envoi des avis de dépôt par email
+- Ajout des contacts de la famille dans la fiche de renseignements
+- Ajout de l'option de tri dans le suivi des inscriptions
+- Correction des titulaires sans adresse dans l'export PES
+
+Version 1.2.4.8 (28/06/2024) :
+
+- Correction de la réattribution manuelle de places
+- Correction du critère période de naissance dans les filtres
+
+Version 1.2.4.7 (27/06/2024) :
+
+- Correction des options sur les consommations dans la grille
+
+Version 1.2.4.6 (27/06/2024) :
+
+- Correction des tarifs spéciaux dans le gestionnaire des consommations
+
+Version 1.2.4.5 (27/06/2024) :
+
+- Ajout du tarif au choix
+- Ajout de l'option date de naissance dans le filtre inscrits/présents
+- Correction sur la sélection des destinataires email et SMS
+
+Version 1.2.4.4 (21/06/2024) :
+
+- Ajout de l'affichage des quantités dans le relevé des prestations
+- Correction du calcul de la formule dans l'état global
+- Correction du tri des forfaits datés dans la sélection de forfaits
+- Correction de l'accès à l'édition d'une fiche de renseignements depuis la fiche famille
+- Correction du calcul du remplissage si fraterie masquée dans grille des consommations
+- Correction protection contre les chevauchements de locations
+
+Version 1.2.4.3 (17/06/2024) :
+
+- Ajout de la rubrique personnalisée dans l'édition des renseignements
+- Ajout du footer dans l'export pdf des datatables
+- Correction de la sélection du tarif d'une location
+
+Version 1.2.4.2 (13/06/2024) :
+
+- Corrections sur la gestion des achats
+
+Version 1.2.4.1 (12/06/2024) :
+
+- Ajout de la gestion des achats dans le menu Comptabilité
+- Correction de la catégorie consommation dans la modification d'une prestation
+- Correction du filtre dans la sélection d'individus destinataires d'emails
+
+Version 1.2.4.0 (03/06/2024) :
+
+- Ajout de l'option Ne jamais appliquer blocage si impayés dans la fiche famille
+- Amélioration de l'affichage des erreurs de formulaires
+- Correction sur la catégorie Consommations dans la modification des prestations
+
+Version 1.2.3.9 (02/06/2024) :
+
+- Ajout du masquage des activités obsolètes dans le widget de sélection d'une activité
+- Correction de l'affichage des structures dans la messagerie de la fiche famille
+
+Version 1.2.3.8 (21/05/2024) :
+
+- Ajout du relevé des prestations dans la rubrique Outils de la fiche famille
+- Ajout de l'attribution automatique de l'utilisateur à une nouvelle structure
+- Ajout de la création de médecins depuis la fiche individuelle
+- Ajout du masquage des activités obsolètes dans les widgets de sélection d'activités
+- Correction de la TVA lors de l'application d'un forfait daté
+
+Version 1.2.3.7 (16/05/2024) :
+
+- Ajout des couleurs au suivi des inscriptions
+- Ajout de l'option Visible sur le portail pour les évènements
+- Ajout d'une colonne Emetteur dans la liste des règlements de la fiche famille
+- Correction sur l'enregistrement de l'émetteur d'un règlement
+- Correction sur le filtre rapide de la colonne dernière action de la liste des comptes internet
+- Correction du total max dans le suivi des consommations
+- Correction des adhésions individuelles sans individu
+- Correction de la suppression des sauvegardes obsolètes avec pcloud
+- Correction du champ forfait dans le formulaire d'une prestation
+
+Version 1.2.3.6 (04/05/2024) :
+
+- Ajout de la sélection des villes dans l'édition des prestations
+- Ajout de l'option Inscrits sur une période dans les statistiques
+- Ajout du header unsubscribe dans les emails groupés
+- Correction de la détection des doublons de consommations si multihoraires
+- Correction de l'option Masquer groupes fermés dans le suivi des consommations
+
+Version 1.2.3.5 (21/04/2024) :
+
+- Ajout de la durée de validité d'une certification dans les paramètres du portail
+- Ajout des modes de calcul dans la génération des attestations fiscales
+- Ajout de la saisie multiple à partir d'un modèle de prestation
+- Correction de l'affichage du mail dans la composition de la famille
+- Correction du filtre rapide de la liste des consommations
+- Correction du calcul des aides si tarif selon le nombre d'individus
+
+Version 1.2.3.4 (10/04/2024) :
+
+- Correction de l'affichage des erreurs Mailjet
+- Correction du champ activités dans la génération des factures et des rappels
+
+Version 1.2.3.3 (07/04/2024) :
+
+- Ajout de la commande Régler une facture dans le menu des actions rapides
+- Ajout de la compatibilité du système de sauvegardes avec pcloud
+- Correction du tri de plusieurs listes déroulantes de choix d'activités
+- Correction prestations négatives dans les attestations fiscales
+- Correction des groupes et unités masqués dans le suivi des consommations
+- Correction url du bouton d'ouverture de la fiche famille dans le détail des consommations
+
+Version 1.2.3.2 (24/03/2024) :
+
+- Ajout de l'option Masquer les groupes et unités fermés dans le suivi des consommations
+- Ajout d'un bouton Ouvrir la fiche famille dans la liste des adhésions
+- Correction sur la list des inscriptions à une activité
+- Correction de la sélection des prestations dans la génération des attestations fiscales
+- Correction sur les noms des contrôles de la modal détail dans la grille des consommations
+- Correction du regroupement par activité dans la synthèse des prestations
+
+Version 1.2.3.1 (11/03/2024) :
+
+- Ajout du masquage des activités obsolètes dans la liste des pièces manquantes
+- Correction de l'affichage du solde dans la liste des adhésions
+- Correction du tri sur total dans la liste des dépôts de règlements
+- Correction de l'envoi des factures par email
+
+Version 1.2.3.0 (06/03/2024) :
+
+- Ajout des filtres de liste génériques
+- Ajout du détail par mode de règlement dans le PDF des dépôts
+- Ajout d'une colonne Solde à la liste des adhésions
+- Ajout du filtre par compte bancaire dans la sélection des règlements d'un dépôt
+- Ajout des coordonnées des responsables dans la liste des individus rattachés
+- Ajout blocage paiement en ligne si mail famille manquant
+- Déplacement de la ventilation dans le form de saisie d'un règlement
+- Correction du détachement d'un individu si consommations existantes
+- Correction de l'envoi des factures par email aux abonnés de ce service
+- Correction de l'affichage des évènements avec groupes distincts
+- Divers petits correctifs
+
+Version 1.2.2.9 (13/02/2024) :
+
+- Ajout d'une colonne Solde dans la liste des adhésions non déposées
+- Correction de l'intégration du lien de désinscription dans un email si tâche cron
+- Correction de la recherche des pièces et adhésions manquantes si inscription close
+- Correction du maj total factures si total prestations à zéro
+
+Version 1.2.2.8 (12/02/2024) :
+
+- Correction du chemin de l'export vers Excel de la liste des consommations
+
+Version 1.2.2.7 (12/02/2024) :
+
+- Ajout de l'export vers Excel de la liste des consommations
+- Ajout de la commande maj configuration accueil
+- Ajout des librairies xlrd et xlsxwriter
+
+Version 1.2.2.6 (11/02/2024) :
+
+- Ajout de la réattribution manuelle des places en attente
+- Ajout de la consultation des réponses des formulaires
+- Ajout d'une colonne Secteur dans la liste des familles et la liste des individus rattachés
+- Ajout du numéro de quittancier dans le PDF des règlements d'un dépôt
+- Ajout du widget Astuce du jour sur la page d'accueil
+- Finalisation du module des formulaires
+- Correction de la page Scolarité de l'outil Statistiques
+
+Version 1.2.2.5 (06/02/2024) :
+
+- Conversion du numéro de facture en BigInteger
+
+Version 1.2.2.4 (05/02/2024) :
+
+- Ajout de l'affichage décimal des durées dans l'état nominatif
+- Masque les unités de conso fermées dans la grille des consommations
+- Correction du dirty des combinaisons d'unités dans la pointeuse
+- Correction de la récupération des quotients dans l'état nominatif
+- Correction de la suppression de colonnes dans l'état nominatif
+
+Version 1.2.2.3 (04/02/2024) :
+
+- Ajout du lien de désinscription dans les mails groupés
+- Ajout des individus masqués dans la rubrique Portail de la fiche famille
+- Ajout de l'onglet Paramètres de la famille sur le portail
+- Optimisation des requêtes dans l'état nominatif
+- Optimisation des requêtes dans la synthèse des consommations
+- Correction de la conversion des dates dans les questionnaires
+
+Version 1.2.2.2 (29/01/2024) :
+
+- Ajout de la suppression des lettres de rappel
+- Ajout des modèles d'impression pour les reçus de la fiche famille
+- Ajout de l'affichage de toutes les familles dans la liste des quotients
+- Optimisation de la recherche des attestations fiscales à générer
+- Correction des valeurs négatives dans la durée de validité d'une adhésion
+- Correction du blocage des réservations si impayés
+- Correction de l'affichage des absences injustifiées sur les factures
+
+Version 1.2.2.1 (22/01/2024) :
+
+- Ajout de la date de situation à la liste des inscrits
+- Ajout des mots-clés INSCRIPTIONS_PERIODE dans impression des adhésions
+- Activation de la signature algo de Payzen
+- Correction blocage type dans paramétrage type d'adhésion
+
+Version 1.2.2.0 (21/01/2024) :
+
+- Ajout du blocage des réservations sur le portail si impayés
+- Ajout de Imprimer une liste d'inscrits dans le menu Individus
+- Modification du format d'import des périodes de vacances
+- Correction de la suppression des modèles email et word
+- Correction du filtre rapide de la liste effacer des familles
+- Correction sur l'impression des inscriptions
+- Correction impression des colonnes visibles dans les datatables
+- Correction sur l'état nominatif
+
+Version 1.2.1.9 (14/01/2024) :
+
+- Ajout des sondages sur le portail
+- Ajout de la rubrique questionnaire sur la fiche famille du portail
+- Ajout du choix de l'algorithme de signature Payzen
+- Ajout de colonnes à la liste détaillée des consommations
+- Amélioration de la liste des soldes du menu Facturation
+- Correction des colonnes avec code identique dans l'état nominatif
+- Correction du datamatrix inversion de la clé 2
+- Correction de l'image intégrée dans les emails
+
+Version 1.2.1.8 (25/12/2023) :
+
+- Ajout des questionnaires aux inscriptions
+- Ajout du blocage des envois groupés pour une famille
+- Correction du filtrage rapide de l'historique général
+- Correction de la validation manuelle des renseignements du portail
+
+Version 1.2.1.7 (20/12/2023) :
+
+- Ajout de colonnes à la liste des règlements
+- Correction du filtre sur l'état des consommations
+- Correction de l'affichage d'un solde créditeur sur le portail
+- Correction sur la taille de l'objet d'un paiement en ligne
+- Correction de l'affichage des factures annulées sur le portail
+- Correction sur la génération du datamatrix
+
+Version 1.2.1.6 (18/12/2023) :
+
+- Ajout du détail des ventilations des règlements
+- Finalisation du détail des ventilations des dépôts
+- Réorganisation du menu Règlements
+- Correction sur l'édition des reçus de règlements
+
+Version 1.2.1.5 (17/12/2023) :
+
+- Ajout du détail des ventilations des dépôts
+- Ajout de la couleur dans les impressions des bootstrap tables
+- Amélioration des bootstrap tables
+- Correction du raccourci Ajouter une famille
+
+Version 1.2.1.4 (13/12/2023) :
+
+- Correction du nom de répertoire des traductions
+
+Version 1.2.1.3 (13/12/2023) :
+
+- Ajout de l'interface multilingue pour le portail
+- Ajout de l'option exclusion de jours pour les réservations du portail
+- Ajout de la colonne Numéro de quittancier dans la liste des dépôts
+- Modification de l'emplacement du bouton Actualiser dans plusieurs pages
+- Inversion du signe du solde d'un rappel
+- Correction des filtres et paramètres sur les listes de type Consulter
+- Correction de la commande Ajouter et nouveau des notes
+
+Version 1.2.1.2 (09/12/2023) :
+
+- Ajout de l'envoi automatique des reçus de règlements
+- Ajout du paramétrage d'évènements par lot
+- Ajout des colonnes Date de naissance et Numéro d'allocataire dans la liste des déductions
+- Ajout de l'option Inclure adhésion sur famille présente dans la génération des factures
+- Ajout du nom du dépôt dans l'impression du détail des prestations d'un dépôt
+- Correction du montant réglé sur la facture
+- Correction du paiement multi factures sur le portail
+
+Version 1.2.1.1 (06/12/2023) :
+
+- Correction du traitement par lot dans le calendrier des ouvertures
+- Correction du calcul du tarif au prorata avec ajustement
+
+Version 1.2.1.0 (05/12/2023) :
+
+- Ajout de la colonne Date limite de paiement dans modifier factures
+- Correction de la date de fin de validité d'une pièce
+- Correction des tarifs avancés dans les évènements
+- Correction de la recherche rapide sur plusieurs listes
+- Correction du détail des prestations d'un dépôt si activité vide
+- Correction du datamatrix
+
+Version 1.2.0.9 (03/12/2023) :
+
+- Ajout du filtre Refus à la synthèse des consommations
+- Ajout de la liste des mails au menu Individus
+- Ajout des états aux statistiques globales
+- Ajout de l'option Masquer les horaires dans la liste des consommations
+- Ajout de l'option Afficher tous les états dans la liste des consommations
+- Ajout de l'option afficher présents dans les totaux de la pointeuse
+- Correction du détail des consommations si évènement
+- Correction du détachement d'un individu
+- Correction de la génération du datamatrix
+- Correction de la recherche des adhésions manquantes
+- Correction du regroupement par qf dans la synthèse des consommations
+- Correction du devis si locations
+
+Version 1.2.0.8 (20/11/2023) :
+
+- Ajout de la commande de maj du montant des dépôts
+
+Version 1.2.0.7 (20/11/2023) :
+
+- Ajout du total max dans le calendrier des ouvertures
+- Ajout du thème bootstrap aux contrôles select2
+- Ajout de la sélection d'individus pour l'édition des renseignements
+- Ajout de l'édition de fiches de renseignements depuis la fiche famille
+- Ajout de la détection mobile pour l'affichage des PDF
+- Ajout des questionnaires aux fiches de renseignements
+- Ajout de la variable TELEPHONE_FORMAT_FR dans les settings
+- Activation des messages familiaux dans les factures
+- Correction des permissions dans le menu des actions rapides
+- Correction sélection destinataires dans envoi mail express
+- Correction export Excel des règlements d'un dépôt
+- Correction tri de plusieurs listes déroulantes
+- Correction de divers petits bugs
+
+Version 1.2.0.6 (13/11/2023) :
+
+- Ajout de l'envoi de SMS avec BREVO
+- Ajout noms de groupes aux inscriptions actives dans la vignette individuelle
+- Ajout de l'option Masquer les présents dans l'édition des consommations
+- Correction du masquage des forfaits datés obsolètes
+- Correction de la capacité max des groupes dans l'assistant de paramétrage
+
+Version 1.2.0.5 (07/11/2023) :
+
+ATTENTION, si vous souhaitez continuer à utiliser la réattribution automatique des places disponibles,
+vous devez désormais l'activer depuis le paramétrage de l'activité > Rubrique Portail > Paramètres.
+
+- Ajout de l'envoi de SMS avec OVH
+- Ajout du format XLSX à l'export des listes bootstrap-table
+- Correction de l'affichage d'une réponse de questionnaire si texte
+- Correction de l'affichage d'un individu sans prénom dans la facture
+- Correction des mots-clés non remplacés dans les impressions
+- Correction et amélioration de la réattribution automatique des places
+- Correction des graphiques age et villes de résidence des statistiques
+- Retrait des symboles euros des listes bootstrap-table
+- Autorise les montants d'adhésions nuls
+- Update bootstrap-table 1.22.1
+
+Version 1.2.0.4 (01/11/2023) :
+
+- Ajout de la liste des règlements associés à un lot de factures
+- Ajout de la page des quotients dans les statistiques
+- Ajout de la date limite de paiement en ligne
+- Correction du calcul du solde de facture dans les prélèvements
+- Correction forfait daté dans grille des consommations
+- Correction du calcul du dernier numéro de cotisation
+
+Version 1.2.0.3 (21/10/2023) :
+
+- Ajout des rappels par email de pièces manquantes
+- Modification décimales colonne ajustement dans ligne tarifaire
+- Correction de l'incrémentation des numéros d'adhésion
+- Correction modification sur paiement payfip déjà payé
+- Correction détection existence forfaits crédit
+
+Version 1.2.0.2 (17/10/2023) :
+
+- Conversion du modèle de rappel html en str
+- Ajout message erreur si notification payfip absente
+- Optimisation de la génération du pdf dans l'état global
+- Correction du filtre dans la saisie d'adhésions par lot
+- Correction du regroupement par quotient dans la synthèse des consommations
+- Correction de l'affichage des activités obsolètes dans les inscriptions actuelles
+
+Version 1.2.0.1 (12/10/2023) :
+
+- Ajout du téléchargement des reçus de règlements sur le portail
+- Ajout de l'affichage du solde famille sur le portail
+- Ajout mail et inscriptions actuelles dans la vignette individuelle
+- Ajout du mail de la famille dans la liste des inscriptions
+- Ajout du détail des consommations [double-clic dans suivi des consommations]
+- Correction de la liste déroulante des arrêts dans des transports programmés
+- Correction des décimales dans le montant unique des tarifs
+
+Version 1.2.0.0 (11/10/2023) :
+
+- Ajout des exclusions de prestations dans la génération des attestations de présence
+- Ajout des filtres de liste dans la saisie d'adhésions par lot
+
+Version 1.1.9.9 (06/10/2023) :
+
+- Ajout de la date limite de paiement en ligne
+- Amélioration du widget Suivi des réservations
+- Correction de l'enregistrement des paramètres du portail
+- Correction du check de sélection dans la génération des factures
+
+Version 1.1.9.8 (04/10/2023) :
+
+- Améliorations sur l'état nominatif
+- Divers correctifs
+
+Version 1.1.9.7 (29/09/2023) :
+
+- Ajout de la dissociation de la prestation dans la liste des consommations
+
+Version 1.1.9.6 (27/09/2023) :
+
+- Ajout de l'évolution des réservations dans le menu consommations
+
+Version 1.1.9.5 (27/09/2023) :
+
+- Ajout de l'évolution des réservations dans les statistiques
+
+Version 1.1.9.4 (26/09/2023) :
+
+- Ajout de la page Adhésions sur le portail
+- Ajout du graphique de l'évolution des réservations
+- Ajout ignore errors sur lecture fichier versions
+- Optimisation de la page paramètres du portail
+- Correction de la recherche rapide de la liste des individus rattachés
+
+Version 1.1.9.3 (21/09/2023) :
+
+- Corrections sur les prélèvements SEPA
+
+Version 1.1.9.2 (21/09/2023) :
+
+- Ajout du rapprochement bancaire dans le menu comptabilité
+- Ajout de l'option d'impression impayés facturés pour les factures
+- Ajout du filtre prestations dans les attestations de présence
+- Ajout des questionnaires dans l'état nominatif
+- Ajout d'une colonne qf à l'état nominatif
+
+Version 1.1.9.1 (20/09/2023) :
+
+- Correction des totaux sur la liste des questionnaires individuels
+
+Version 1.1.9.0 (20/09/2023) :
+
+- Ajout de l'annulation de factures
+- Ajout des totaux de colonnes dans certaines listes
+- Correction de la sélection de l'activité dans la modification de prestations
+- Ajout du code analytique aux activités et aux prestations
+- Ajout de l'affichage des prélèvements dans l'édition du récap des factures
+- Ajout de l'affichage des prélèvements sur les factures
+- Affichage des forfaits crédit compatibles avec le groupe de l'inscrit
+- Correction du blocage du paiement en ligne si prélèvement actif
+- Correction du calcul du prochain numéro de facture si préfixe
+- Correction de l'url de retour après l'ajout de prestations dans une facture
+
+Version 1.1.8.9 (15/09/2023) :
+
+- Ajout de la consultation et modification de la facture
+- Transformation des questionnaires en formulaire vertical
+
+Version 1.1.8.8 (14/09/2023) :
+
+- Ajout du filtre de liste datetime
+- Ajout du filtre de liste spécial date de naissance
+- Ajout des colonnes mail et genre dans la liste des individus rattachés
+- Ajout d'une colonne Email dans la liste des inscriptions par activité
+- Correction de la fusion des valeurs dans Word
+- Correction de la liste des questionnaires individuels
+- Retrait de la pagination dans le recalcul des prestations
+
+Version 1.1.8.7 (10/09/2023) :
+
+- Ajout de la gestion des plugins
+- Ajout de la création de remboursements
+- Ajout de la colonne Caisse dans la liste des déductions
+- Masque les inscriptions non valides dans le gestionnaire
+- Correction du filtre de liste date si vide
+
+Version 1.1.8.6 (07/09/2023) :
+
+- Ajout de la purge des filtres de liste pour un utilisateur
+- Correction du calcul des places restantes
+- Correction de la suppression des remplissages dans le calendrier des ouvertures
+
+Version 1.1.8.5 (07/09/2023) :
+
+- Ajout de la gestion des abonnés aux listes de diffusion
+- Ajout de l'adresse de facturation alternative
+- Ajout du filtre de liste Non scolarisé
+- Ajustement du css du filtre groupes
+
+Version 1.1.8.4 (05/09/2023) :
+
+- Correction affichage scolarité sans classe dans grille
+
+Version 1.1.8.3 (03/09/2023) :
+
+- Ajout de la notification à l'utilisateur du paiement payfip
+
+Version 1.1.8.2 (30/08/2023) :
+
+- Correction solde de la période de préfacturation
+
+Version 1.1.8.1 (30/08/2023) :
+
+- Correction calcul solde famille après correction ventilation
+
+Version 1.1.8.0 (29/08/2023) :
+
+- Correction erreur 403 sur planning portail
+
+Version 1.1.7.9 (28/08/2023) :
+
+- Ajout du traitement par lot global
+- Correction de l'affichage des attestations de présence
+
+Version 1.1.7.8 (23/08/2023) :
+
+- Ajout de la vérification de la date de début lors de l'ajout d'une inscription
+- Correction de l'importation des prestations des forfaits datés dans le gestionnaire
+- Correction sur le paiement en ligne avec Payfip
+
+Version 1.1.7.7 (21/08/2023) :
+
+- Ajout de la modification des factures par lot
+- Ajout de la colonne régie dans la liste des factures
+- Correction de l'enregistrement de la régie dans les factures
+
+Version 1.1.7.6 (21/08/2023) :
+
+- Correction de l'affichage des places en attente
+
+Version 1.1.7.5 (21/08/2023) :
+
+- Correction de la recherche des places en attente pour les individus rattachés à plusieurs familles
+- Correction select_related sur les aides dans la grille des consommations
+- Correction de la purge des mdp
+
+Version 1.1.7.4 (16/08/2023) :
+
+- Ajout de la fusion des contrats collaborateurs vers Word
+- Ajout du module de fusion vers Word
+- Ajout des questionnaires aux contrats collaborateurs
+- Ajout de la colorisation du montant des prestations selon la ventilation
+- Ajout de la colorisation du solde famille en rouge
+
+Version 1.1.7.3 (14/08/2023) :
+
+- Ajout de la mémorisation du gabarit des étiquettes
+- Ajout de la suppression des consommations associées à une prestation
+- Correction de l'affichage des niveaux scolaires dans la grille des consommations
+- Correction de la duplication d'une activité sans combinaisons tarifaires
+- Correction de l'export de prélèvements si titulaire manuel
+- Correction des options d'affichage du total des devis
+
+Version 1.1.7.2 (31/07/2023) :
+
+- Ajout du récapitulatif des factures dans le menu Facturation
+- Correction des prestations sans activité dans la synthèse des prestations
+- Correction de l'url d'accès à la liste des devis d'une famille
+
+Version 1.1.7.1 (31/07/2023) :
+
+- Ajout du déblocage axes par url
+- Correction de l'export magnus avec prestations sans activité
+
+Version 1.1.7.0 (14/07/2023) :
+
+- Ajout de la description des événements dans le mail de confirmation des réservations
+- Ajout de l'importation des familles depuis dominoweb
+- Amélioration de la sélection des forfaits datés à appliquer
+- Correction de l'inscription depuis le portail si option inscriptions multiples activée
+- Correction de l'application des forfaits datés sans consommations
+- Correction des tarifs selon montant questionnaire
+- Correction de la bootbox dans l'envoi des factures par email
+
+Version 1.1.6.9 (10/07/2023) :
+
+- Ajout des prestations familiales aux devis
+- Correction filtre statut inscription
+- Correction impression état nomin si champ vide
+
+Version 1.1.6.8 (06/07/2023) :
+
+- Ajout du critère statut de l'inscription dans les filtres de liste
+- Ajout de la commande maj_total_factures
+- Correction dans la recherche des pièces manquantes
+- Correction wait dialog dans edition_informations
+- Correction recherche quantité dans la grille des consommations
+- Correction récupération famille dans transmettre_piece
+- Correction conversion date dans l'état nominatif
+
+Version 1.1.6.7 (29/06/2023) :
+
+- Ajout de la fonction Changer de groupe par lot dans le menu Individus
+
+Version 1.1.6.6 (27/06/2023) :
+
+- Correction de l'import des filtres de liste
+- Correction de la date de référence dans le filtre Inscrits
+
+Version 1.1.6.5 (19/06/2023) :
+
+- Ajout des états de consommations dans les filtres de liste
+- Correction sur les prestations sans activité dans l'impression de reçu
+- Correction de l'attribut défaut dans les modèles d'impression
+
+Version 1.1.6.4 (18/06/2023) :
+
+- Ajout de la description des évènements dans la grille des consommations
+- Ajout de l'enregistrement du nom de l'évènement dans l'historique
+- Correction du solde des factures dans les lots pes
+
+Version 1.1.6.3 (13/06/2023) :
+
+- Ajout de la prévisualisation des factures
+- Correction de l'impression des factures avec prestations sans individus associés
+
+Version 1.1.6.2 (11/06/2023) :
+
+- Ajout de la colonne affichage dans la liste des périodes de réservations
+- Ajustements sur les lots de prélèvements
+- Correction du téléchargement des factures depuis le portail
+- Correction de divers bugs
+
+Version 1.1.6.1 (03/06/2023) :
+
+- Ajout d'une colonne solde dans la liste des inscriptions à une activité
+- Correction du tri des activités dans l'impression d'une facture
+
+Version 1.1.6.0 (29/05/2023) :
+
+- Ajout du récapitulatif des impayés sur le portail
+
+Version 1.1.5.9 (28/05/2023) :
+
+- Correction du suivi des réservations
+
+Version 1.1.5.8 (28/05/2023) :
+
+- Ajout du suivi des réservations du portail dans le menu Outils
+- Ajout du widget du suivi des réservations sur le tableau de bord
+
+Version 1.1.5.7 (27/05/2023) :
+
+- Ajout des périodes prédéfinies au sélecteur de période
+- Ajout du tri dans l'édition des règlements d'un dépôt
+- Optimisation de l'affichage de la synthèse des impayés
+- Correction du compte obligatoire dans la régie
+- Correction du filtre rapide sur le choix des individus dans l'éditeur emails
+- Correction de l'activation des abonnements services internet
+- Correction de la génération des attestations fiscales si individu sans date de naissance
+- Correction de l'ordre des colonnes dans la synthèse des impayés
+
+Version 1.1.5.6 (24/05/2023) :
+
+- Ajout du blocage des inscriptions sur le portail si activité complète
+- Correction de l'évitement de la vérification de la ventilation
+- Correction de l'ouverture des PDF sur Android
+
+Version 1.1.5.5 (22/05/2023) :
+
+- Ajout de l'impression du dépôt de règlements
+- Ajout du mode consultation dans les périodes de réservations
+- Amélioration de l'affichage de l'adresse d'expédition d'emails
+- Correction des colonnes nombre et total dans la liste des dépôts
+- Correction récupération url portail dans l'envoi d'emails
+
+Version 1.1.5.4 (16/05/2023) :
+
+- Optimisation de l'édition des reçus de règlements
+- Correction de la ventilation des règlements avec avoirs
+
+Version 1.1.5.3 (15/05/2023) :
+
+- Ajout de la validation par lot dans le traitement des demandes du portail
+- Ajout du téléchargement direct du PDF de la liste des consommations
+
+Version 1.1.5.2 (14/05/2023) :
+
+- Correction du correcteur
+
+Version 1.1.5.1 (14/05/2023) :
+
+- Ajout de la commande fix_types_vaccins
+- Correction de l'objet manquant dans les modèles d'emails
+
+Version 1.1.5.0 (09/05/2023) :
+
+- Ajout des modèles d'impression
+- Ajout de l'impression des factures sur le portail
+- Ajout des champs organisateur aux modèles d'emails
+- Ajout de la commande complete_initial_data
+- Correction des fériés dans la saisie d'ouvertures par lot
+- Correction des décimales dans le tarif par taux d'effort
+- Correction de la majoration dans les lignes tarifaires
+
+Version 1.1.4.9 (03/05/2023) :
+
+- Correction du blocage des places si attente
+
+Version 1.1.4.8 (02/05/2023) :
+
+- Ajout de l'expiration des mots de passe provisoires
+- Correction de la condition caisse dans la grille
+- Correction de la période de la liste d'attente
+- Correction de la maj des prestations après modification d'un qf
+
+Version 1.1.4.7 (30/04/2023) :
+
+- Ajout du paiement en ligne des adhésions
+- Ajout de l'option d'envoi de mails de confirmation des réservations
+- Correction de la consommation horaire sans heures par défaut
+- Correction de la fusion des champs organisateur si valeurs vides
+- Correction du remplissage sans id_groupe
+
+Version 1.1.4.6 (27/04/2023) :
+
+- Ajout command updater
+- Correction du calendrier des ouvertures avec idgroupe null
+
+Version 1.1.4.5 (21/04/2023) :
+
+- Ajout de la fonction Solder les impayés dans le menu Facturation
+
+Version 1.1.4.4 (19/04/2023) :
+
+- Ajout du module des transports
+
+Version 1.1.4.3 (16/04/2023) :
+
+- Ajout des modèles d'aides dans le menu Paramétrage
+- Ajout des colonnes cachées adresse dans la liste des adhésions
+- Correction du montant questionnaire dans la tarification
+
+Version 1.1.4.2 (10/04/2023) :
+
+- Ajout de la saisie des horaires ou quantités par l'usager depuis le portail
+
+Version 1.1.4.1 (09/04/2023) :
+
+- Ajout de la duplication d'une activité
+- Ajout de délais de réservations supplémentaires pour le portail
+- Ajout de select2 au formulaire d'une étape de scolarité
+- Correction du tarif selon un montant questionnaire
+- Petites corrections
+
+Version 1.1.4.0 (04/04/2023) :
+
+- Ajout des groupes de collaborateurs
+- Correction de la recherche du fichier des versions hors ligne
+- Petites corrections
+
+Version 1.1.3.9 (02/04/2023) :
+
+- Ajout du module Collaborateurs
+- Ajout des équivalences en heures dans l'état global
+- Correction de l'affichage du planning des locations
+
+Version 1.1.3.8 (25/03/2023) :
+
+- Ajout de la page Activités sur le portail
+- Ajout de l'inscription à une nouvelle activité depuis le portail
+- Correction du template de la page Transmettre une pièce du portail
+
+Version 1.1.3.7 (20/03/2023) :
+
+- Ajout du module Comptabilité
+- Correction du calcul du tarif des évènements multiples
+
+Version 1.1.3.6 (14/03/2023) :
+
+- Correction de l'installation du plugin fullcalendar
+
+Version 1.1.3.5 (14/03/2023) :
+
+- Ajout du module Locations
+- Ajout du plugin fullcalendar
+- Ajout du div commandes statique
+- Correction de la sélection de l'émetteur dans le règlement
+
+Version 1.1.3.4 (13/03/2023) :
+
+- Ajout de la date de référence dans le filtre Inscrits
+- Ajout des vérifications dans l'effacement des familles
+- Correction du datamatrix avec numdette alpha
+
+Version 1.1.3.3 (05/03/2023) :
+
+- Ajout de l'effacement des familles
+- Ajout de la librairie django-cleanup
+
+Version 1.1.3.2 (04/03/2023) :
+
+- Correction de la détection d'un jour de vacances
+
+Version 1.1.3.1 (04/03/2023) :
+
+- Ajout du règlement automatique aux prélèvements
+
+Version 1.1.3.0 (03/03/2023) :
+
+- Ajout du mode dernier numéro de facture
+- Ajout de la correction d'anomalies au cron
+- Correction du tri des prestations dans les factures
+- Correction de la vérification des périodes dans la grille
+- Correction du filtre prélèvement activé
+
+Version 1.1.2.9 (28/02/2023) :
+
+- Correction des évènements à tarif simple
+
+Version 1.1.2.8 (26/02/2023) :
+
+- Correction de la date de référence dans la grille virtuelle
+
+Version 1.1.2.7 (26/02/2023) :
+
+- Ajout des attestations fiscales
+- Ajout de mots-clés à l'export magnus
+- Améliorations sur la génération des rappels
+- Correction sur le calcul du tarif selon le nombre d'individus
+
+Version 1.1.2.6 (14/02/2023) :
+
+- Correction sur widgets accueil si manquants
+- Petits correctifs
+
+Version 1.1.2.5 (13/02/2023) :
+
+- Correction des impayés sur les factures
+
+Version 1.1.2.4 (08/02/2023) :
+
+- Correction de la mise à jour de l'application
+
+Version 1.1.2.3 (07/02/2023) :
+
+- Correction de la réinitialisation des codes
+
+Version 1.1.2.2 (07/02/2023) :
+
+- Ajout du widget Adhésions manquantes pour le tableau de bord
+- Petits correctifs
+
+Version 1.1.2.1 (07/02/2023) :
+
+- Correction du tiers solidaire dans l'export vers BL
+
+Version 1.1.2.0 (07/02/2023) :
+
+- Correction de la génération du datamatrix
+
+Version 1.1.1.9 (06/02/2023) :
+
+- Ajout du filtre de liste Prélèvement activé
+- Ajout des unités liées dans le paramétrage des unités de consommations
+- Ajout de la suppression des doublons de consommations dans le correcteur
+- Correction du prochain numéro dans la génération des factures
+
+Version 1.1.1.8 (02/02/2023) :
+
+- Correction de petits bugs
+
+Version 1.1.1.7 (30/01/2023) :
+
+- Ajout de la librairie pystrich
+- Correction de l'intégration du datamatrix dans les factures
+- Correction de l'affichage de l'horodatage d'un message du portail
+- Correction de l'affichage des codes-barres individu dans l'éditeur d'étiquettes
+- Correction de l'impression d'un reçu de règlement
+- Correction du nom de tarif selon description
+
+Version 1.1.1.6 (25/01/2023) :
+
+- Ajout de la validation XSD sur l'export PES
+- Correction de la balise per dans l'export PES
+
+Version 1.1.1.5 (24/01/2023) :
+
+- Petits correctifs
+
+Version 1.1.1.4 (22/01/2023) :
+
+- Ajout des modèles de prestations
+- Amélioration de l'affichage des erreurs dans les formulaires
+- Correction de l'encoding de l'export PES
+
+Version 1.1.1.3 (14/01/2023) :
+
+- Correction des treegrid
+- Nettoyage de la librairie bootstrap-table
+
+Version 1.1.1.2 (14/01/2023) :
+
+- Ajout de colonnes dans la liste des déductions
+- Correction de l'émetteur dans la saisie des règlements
+- Correction de l'enregistrement de l'auteur d'une pièce
+- Correction de la ventilation dans la saisie d'un règlement
+- Correction de l'affichage des reports dans l'assistant de génération des factures
+
+Version 1.1.1.1 (09/01/2023) :
+
+- Ajout du groupe dans la liste des inscriptions par activité
+
+Version 1.1.1.0 (08/01/2023) :
+
+- Update du plugin Datatables
+
+Version 1.1.0.9 (08/01/2023) :
+
+- Ajout de la liste des inscriptions à une activité
+- Ajout de la mémorisation des colonnes affichées et de la pagination dans les listes
+- Ajout de l'option afficher le nom de l'organisateur sur la page de connexion du portail
+- Correction de l'import du logo dans les modèles de documents
+
+Version 1.1.0.8 (04/01/2023) :
+
+- Ajout de l'envoi des mails par lot
+- Ajout du menu dans le widget notes du tableau de bord
+- Correction de la liste des utilisateurs bloqués
+- Correction du filtre présent dans la liste des consommations
+- Correction de la liste de diffusion sur le portail famille
+
+Version 1.1.0.7 (04/01/2023) :
+
+- Ajout de mots-clés pour les tâches récurrentes
+- Petites corrections
+
+Version 1.1.0.6 (04/01/2023) :
+
+- Ajout des tâches
+- Ajout du tableau de bord configurable
+- Ajout des dépendances feedparser et beautifulsoup4
+
+Version 1.1.0.5 (26/12/2022) :
+
+- Correction de l'application d'un forfait crédit
+
+Version 1.1.0.4 (16/12/2022) :
+
+- Correction de la détection du tarif fratries
+
+Version 1.1.0.3 (15/12/2022) :
+
+- Modification de la couleur des absences injustifiées
+- Correction du calcul du remplissage quand groupe est null
+- Correction de la détection de la période d'une date dans la grille
+- Correction de la condition d'application par période dans le tarif
+- Correction de la détection des forfaits crédit
+
+Version 1.1.0.2 (12/12/2022) :
+
+- Amélioration du correcteur d'anomalies
+
+Version 1.1.0.1 (02/12/2022) :
+
+- Ajout des forfaits crédit
+- Ajout des codes services dans les activités
+- Correction de petits bugs
+
+Version 1.1.0.0 (28/11/2022) :
+
+- Correction de l'envoi de SMS depuis la fiche famille
+
+Version 1.0.9.9 (28/11/2022) :
+
+- Ajout du bouton tout cocher dans la sélection des classes du gestionnaire
+- Correction de petits bugs
+
+Version 1.0.9.8 (21/11/2022) :
+
+- Ajout de la dépendance colorhash
+- Ajout de l'envoi de SMS depuis la fiche famille
+- Ajout de l'envoie des codes internet par SMS
+- Ajout des modèles de SMS dans le menu Paramétrage
+
+Version 1.0.9.7 (16/11/2022) :
+
+- Correction d'un bug sur le tarif selon le nombre d'enfants de la famille
+
+Version 1.0.9.6 (16/11/2022) :
+
+- Ajout du tarif selon le nombre d'enfants de la famille présents
+- Ajout des lignes de tarifs dans les prestations
+- Ajout de la procédure de réinitialisation des mdp
+- Correction de l'import des cotisations individuelles sans idfamille
+- Correction de l'export PDF des listes
+- Correction de petits bugs
+
+Version 1.0.9.5 (07/11/2022) :
+
+- Ajout des procédures
+- Ajustements sur le paiement en ligne
+- Correction de petits bugs
+
+Version 1.0.9.4 (06/11/2022) :
+
+- Correction du recalcul du solde des factures
+- Correcteur de l'émetteur dans la saisie des règlements
+- Corrections diverses sur les paiements en ligne
+
+Version 1.0.9.3 (06/11/2022) :
+
+- Ajout du paiement en ligne avec Payzen et Payfip
+- Ajout des tiers solidaires à l'export Magnus
+- Correction de petits bugs
+
+Version 1.0.9.2 (01/11/2022) :
+
+- Ajout des tiers solidaires
+- Correction de petits bugs
+
+Version 1.0.9.1 (31/10/2022) :
+
+- Correction du calcul du remplissage quand la quantité est nulle
+
+Version 1.0.9.0 (24/10/2022) :
+
+- Correction de l'import des mots de passe internet
+
+Version 1.0.8.9 (23/10/2022) :
+
+- Ajout du champ Actif sur les adresses d'expédition d'emails
+- Correction de la commande de sauvegarde
+
+Version 1.0.8.8 (23/10/2022) :
+
+- Correction de petits bugs
+
+Version 1.0.8.7 (12/10/2022) :
+
+- Ajout des fenêtres popup sur le portail
+- Ajout du nettoyage des sauvegardes obsolètes
+- Ajout de la correction automatique dans le correcteur
+
+Version 1.0.8.6 (06/10/2022) :
+
+- Ajout de la liste des durées
+- Ajout des pénalités financières
+- Ajout des prélèvements SEPA
+- Ajout d'un check dans la liste des inscriptions scolaires
+- Correction de la saisie des heures des événements
+- Correction de l'incrémentation des numéros de cotisations
+- Correction de petits bugs
+
+Version 1.0.8.5 (07/09/2022) :
+
+- Correction de l'affichage de tous les inscrits dans la liste des consommations
+- Amélioration de l'affichage des individus décédés
+
+Version 1.0.8.4 (25/08/2022) :
+
+- Correction des filtres de liste
+
+Version 1.0.8.3 (25/08/2022) :
+
+- Correction du filtre par niveaux scolaires
+
+Version 1.0.8.2 (25/08/2022) :
+
+- Ajout du filtre de liste par niveaux scolaires
+- Ajout du lien assistant familial
+
+Version 1.0.8.1 (22/08/2022) :
+
+- Ajout de la modification des inscriptions par lot
+
+Version 1.0.8.0 (19/08/2022) :
+
+- Correction sur la prestation cotisation dans la grille
+
+Version 1.0.7.9 (06/07/2022) :
+
+- Correction sur les régimes dans l'état global
+
+Version 1.0.7.8 (22/06/2022) :
+
+- Correction de la permission sur les assistants de paramétrage
+
+Version 1.0.7.7 (15/06/2022) :
+
+- Ajout d'un masque sur les iban et bic
+- Correction du nom de la colonne identifiant internet
+- Correction de la recherche rapide dans les listes emails et sms
+- Correction des villes dans la liste des inscriptions
+
+Version 1.0.7.6 (13/06/2022) :
+
+- Ajout du tri par classe dans l'édition d'une fiche de renseignements
+- Ajout du nombre de factures associées aux lots de facture
+- Correction de la saisie des consommations dans un forfait daté
+
+Version 1.0.7.5 (10/04/2022) :
+
+- Ajout des exports PES et JVS
+- Ajout de la liste des utilisateurs bloqués
+- Ajout d'un raccourci depuis la page d'accueil vers la liste d'attente
+- Ajout de la prédiction du modèle d'export à sélectionner
+- Ajout de la sélection de groupes dans l'édition des contacts
+- Ajout de la colonne Facture dans la liste générale des prestations
+- Amélioration de l'affichage de la liste d'attente
+- Modification de l'ordre des lots de factures et de rappels
+- Correction des espaces et majuscules dans l'export PES
+- Correction du filtre rapide dans l'édition de badges
+
+Version 1.0.7.4 (05/04/2022) :
+
+- Ajout d'options aux impressions des attestations et devis
+- Amélioration de l'intégration des signataires dans les attestations et les devis
+- Amélioration de la liste des attestations de la fiche famille
+- Correction du filtre de la liste des prestations de la fiche famille
+
+Version 1.0.7.3 (04/04/2022) :
+
+- Ajout d'une colonne ville dans la liste des inscriptions
+- Ajout de la date personnalisée dans la modification d'une inscription
+- Correction des options dans la grille virtuelle
+- Correction des adhésions dans le correcteur
+- Correction du filtre sur champs cryptés
+
+Version 1.0.7.2 (26/03/2022) :
+
+- Ajout de la mémorisation du tri des listes
+- Ajout signalement numéros manquants dans éditeur SMS
+- Ajout signalement adresses manquantes dans éditeur emails
+- Ajout help text dans formulaire d'ajout d'un individu
+- Correction affichage adresse vide dans vignette individu
+- Correction détail des factures
+
+Version 1.0.7.1 (13/03/2022) :
+
+- Amélioration de la pointeuse
+- Ajout de l'ajout des inscrits d'un groupe dans le gestionnaire
+- Ajustement de l'affichage des boutons dans le détail d'une consommation
+- Optimisation de set_categorie dans les paramètres
+- Correction des tiers en majuscules dans l'export BL
+- Correction de la saisie d'une cotisation
+
+Version 1.0.7.0 (08/03/2022) :
+
+- Ajout de la suppression dans le champ de recherche de la grille des consommations
+- Rend la recherche insensible aux accents dans la grille des consommations
+- Désactive l'affichage des photos dans la pointeuse
+- Correction de la vérification lors de la modification d'un quotient
+- Correction du calcul des prestations si quotient à zéro
+
+Version 1.0.6.9 (07/03/2022) :
+
+- Ajout de la mémorisation de paramètres dans la génération des factures
+- Ajout de la structure aux assistants de paramétrage
+
+Version 1.0.6.8 (06/03/2022) :
+
+- Ajout de l'état nominatif
+- Ajout du nom de profil dans la liste des consommations
+- Ajout de nouvelles options d'impression des factures
+- Ajout de la suppression de plusieurs factures
+- Ajout des équivalences aux unités de conso
+- Petites corrections
+
+Version 1.0.6.7 (22/02/2022) :
+
+- Génération auto des codes comptables des familles
+
+Version 1.0.6.6 (21/02/2022) :
+
+- Limitation de l'affichage de l'historique général
+- Remplace Annuler par Fermer dans les éditeurs mails et sms
+- Affiche les auteurs des mails et sms
+- Correction de la sélection des groupes dans le gestionnaire
+- Correction du filtre de liste présents
+- Correction de l'export BL
+
+Version 1.0.6.5 (13/02/2022) :
+
+- Ajout de l'éditeur de SMS
+- Ajout compatibilité Django 4
+- Amélioration du dépôt des règlements
+- Amélioration du dépôt des cotisations
+
+Version 1.0.6.4 (08/02/2022) :
+
+- Correction du délai de traitement des attentes
+
+Version 1.0.6.3 (07/02/2022) :
+
+- Correction de l'affichage du détail d'une facture sur le portail
+- Update bootstrap-table et table-export
+- Update requirements
+
+Version 1.0.6.2 (02/02/2022) :
+
+- Ajout de la ville de résidence dans la liste des inscriptions scolaires
+- Ajout de la prédiction de l'exercice et du mois selon le nom de l'export pes
+- Meilleure prise en charge des adresses postales à plusieurs lignes
+- Correction des prestations antérieures dans la génération des factures
+- Correction de la sélection des factures au-dessus d'un montant donné
+- Petites corrections
+
+Version 1.0.6.1 (02/02/2022) :
+
+- Stabilisation de la pointeuse
+- Ajout des heures min et max des unités de consommation
+- Petites corrections
+
+Version 1.0.6.0 (31/01/2022) :
+
+- Correction de l'export pes
+- Correction de l'édition des prestations
+- Correction de la recherche des doublons de conso avec événements dans le correcteur
+- Correction de la saisie des quotients si caisse null
+
+Version 1.0.5.9 (30/01/2022) :
+
+- Ajout d'un loader durant le submit de la grille des consommations
+- Ajout de la mémorisation du mode paramètres dans le gestionnaire des consommations
+- Correction du traitement automatique des réservations en attente
+- Allègement du logger de la grille des consommations
+- Ajustements pour le dark-mode
+
+Version 1.0.5.8 (28/01/2022) :
+
+- Ajout de l'infobulle des places dans le suivi des consommations
+- Correction de l'affichage des jours complets dans le suivi des consommations
+- Correction de l'affichage de la couleur de case des événements
+
+Version 1.0.5.7 (27/01/2022) :
+
+- Ajout du vidage du répertoire temp
+- Correction du traitement des réservations en attente
+
+Version 1.0.5.6 (27/01/2022) :
+
+- Petites corrections diverses
+
+Version 1.0.5.5 (27/01/2022) :
+
+- Affichage du nombre de cotisations associées dans le paramétrage des cotisations
+- Correction de la recherche rapide dans la liste des inscriptions
+- Correction du filtre décimal pour customdatatable
+- Correction du saut à la ligne dans l'export pes
+
+Version 1.0.5.4 (24/01/2022) :
+
+- Ajout du filtre de liste Scolarité
+
+Version 1.0.5.3 (18/01/2022) :
+
+- Ajout de l'impression PDF d'un export PES
+- Ajout de l'édition des prestations dans le menu Prestations
+
+Version 1.0.5.2 (16/01/2022) :
+
+- Ajout des prestations sans conso dans le correcteur
+- Ajout de la modification dans la liste des consommations
+- Affichage du nom complet de l'auteur du message du portail
+- Ajout de la colonne Tarif à la liste des prestations
+- Ajout de la question personnelle de sécurité
+- Ajout de la notification des messages par email à l'administrateur de la structure
+- Ajout du calendrier annuel des ouvertures
+- Ajout du recalcul après modification du quotient
+- Ajout du bouton Ouvrir fiche famille dans la liste des quotients
+- Ajout du rappel des données caisse durant la saisie d'un quotient
+- Ajout de l'affichage des messages dans des infobulles
+- Désactivation du reset paging des datatables
+- Correction de l'ordre alpha des noms de la liste des consommations
+- Correction de la permission d'affichage des notifications des renseignements
+- Correction du marquage comme lu des messages
+- Correction de l'affichage des fériés variables dans le calendrier des ouvertures
+
+Version 1.0.5.1 (06/01/2022) :
+
+- Ajout de l'ajout multiple d'individus dans le gestionnaire des consommations
+- Correction de l'affichage des inscrits dans le gestionnaire des consommations
+- Correction de l'accès à la fonction de recherche avancée des individus
+
+Version 1.0.5.0 (05/01/2022) :
+
+- Ajout du masquage des dates non ouvertes pour l'individu dans la grille des consommations
+- Correction de l'enregistrement des remplissages dans le calendrier des ouvertures
+
+Version 1.0.4.9 (04/01/2022) :
+
+- Correction de l'affichage des photos dans les documents PDF
+- Correction de l'image montgolfière dans l'édition des anniversaires
+- Correction de l'affichage des doublons dans le correcteur
+
+Version 1.0.4.8 (03/01/2022) :
+
+- Correction de la largeur de la première colonne de la grille des conso sur les mobiles
+- Correction de l'affichage du planning si previous page après logout
+- Correction de l'affichage du prénom si collectivité dans la grille des conso
+
+Version 1.0.4.7 (02/01/2022) :
+
+- Ajout de la recherche avancée d'individus dans le menu Individus
+- Ajout de la liste des photos manquantes dans le menu Individus
+- Ajout de la recherche des consommations gratuites dans le correcteur
+- Correction de l'affichage des individus ajoutés manuellement dans le gestionnaire
+
+Version 1.0.4.6 (31/12/2021) :
+
+- Ajout du correcteur d'anomalies
+- Correction de la suppression des consommations fantômes
+
+Version 1.0.4.5 (30/12/2021) :
+
+- Ajout du filtre de liste individus sans réservations
+- Ajout de la rétroactivité sur les consommations après la modification d'une inscription
+- Correction de la sauvegarde mysql sur les champs blob
+- Correction de la pointeuse en temps réel
+- Correction recherche rapide dans historique
+
+Version 1.0.4.4 (19/12/2021) :
+
+- Ajout des graphiques de type chrono dans les stats
+- Ajout des stats des dates de saisie des conso
+- Ajout de fonctionnalités aux stats du portail
+
+Version 1.0.4.3 (18/12/2021) :
+
+- Ajout des statistiques du portail
+- Autorise null dans l'objet d'un modèle d'email
+
+Version 1.0.4.2 (17/12/2021) :
+
+- Correction de la mémorisation des écoles dans le profil de configuration de l'édition des consommations
+- Correction du saut de page après l'école dans l'édition des consommations
+- Correction de la validation regex des adresses mail
+
+Version 1.0.4.1 (16/12/2021) :
+
+- Correction du renseignement de type document
+
+Version 1.0.3.9 (15/12/2021) :
+
+- Ajout de l'édition des informations et régimes
+
+Version 1.0.3.8 (15/12/2021) :
+
+- Ajout de l'impression des mandats
+- Correction de l'impression des reçus de règlements
+
+Version 1.0.3.7 (15/12/2021) :
+
+- Ajout du non-regroupement par groupe dans l'édition des consommations
+- Correction de l'option Afficher tous les inscrits dans l'édition des consommations
+- Correction de l'affichage des classes dans les paramètres du gestionnaire des consommations
+- Améliorations de l'affichage des modifications des renseignements sur le portail
+
+Version 1.0.3.6 (13/12/2021) :
+
+- Correction de l'insertion des photos dans les PDF
+- Correction du regex de validation des adresses mail
+- Correction de l'accès à la rubrique Edition des fiches
+- Petits ajustements dans l'édition des fiches
+
+Version 1.0.3.5 (12/12/2021) :
+
+- Ajout de l'édition des renseignements
+
+Version 1.0.3.4 (11/12/2021) :
+
+- Ajout de l'édition des contacts
+
+Version 1.0.3.3 (10/12/2021) :
+
+- Ajout de la liste des repas
+
+Version 1.0.3.2 (09/12/2021) :
+
+- Ajout de la liste des consommations sans prestations
+- Correction du dédoublement des conso avec la semaine-type
+- Correction des événements gratuits
+- Correction du fuseau horaire
+
+Version 1.0.3.1 (08/12/2021) :
+
+- Ajout de l'envoi de notification de message à la famille
+- Correction maj des infos familles sur le portail
+
+Version 1.0.3.0 (06/12/2021) :
+
+- Correction de l'assureur obligatoire dans la saisie d'une assurance
+
+Version 1.0.2.9 (05/12/2021) :
+
+- Ajout de la liste des consommations dans le menu Consommations
+- Ajout suppression auto des champs destinataires et pièces jointes dans les mails
+- Modification de la position des boutons dans liste destinataires mail
+- Amélioration affichage pas de période disponible sur portail
+
+Version 1.0.2.8 (04/12/2021) :
+
+- Nouvelle correction du bug de réinitialisation du mdp du portail
+
+Version 1.0.2.7 (04/12/2021) :
+
+- Correction d'un bug dans la réinitialisation du mdp du portail
+
+Version 1.0.2.6 (04/12/2021) :
+
+- Correction de bugs dans l'envoi des codes internet par email
+- Correction de divers bugs
+
+Version 1.0.2.5 (03/12/2021) :
+
+- Ajout du filtre villes dans les périodes de réservations
+- Correction filtre individu présent dans 2 listes
+- Correction accès activité dans gestionnaire des conso
+- Correction affichage des événements dans liste des conso
+- Correction date_modifiable_min dans grille des conso
+
+Version 1.0.2.4 (29/11/2021) :
+
+- Remplacement des boutons d'ajouts d'éléments sur le portail
+- Suppression des boutons Enregistrer et Ajouter sur le portail
+
+Version 1.0.2.3 (29/11/2021) :
+
+- Ajout de l'annuaire des structures sur le portail
+- Correction de l'ouverture d'une unité de cotisation
+- Correction de l'url sur le logo du portail
+
+Version 1.0.2.2 (28/11/2021) :
+
+- Ajout de la saisie par semaine-type dans la grille des conso
+- Associe la touche CTRL à l'application de conso avec les paramètres par défaut
+- Ajout de l'importation d'assurances depuis une autre fiche
+- Ajout d'une modal de confirmation aux widgets select avec commandes
+- Associe les filtres de liste aux utilisateurs
+- Ajout de la vérification des dates dans saisie assurance depuis portail
+- Correction l'accès au widget calendrier depuis le portail
+- Correction de divers bugs
+
+Version 1.0.2.1 (27/11/2021) :
+
+- Ajout de l'historique du portail
+- Sélection auto des groupes et catégories si choix unique durant inscription
+- Correction de divers bugs
+
+Version 1.0.2.0 (23/11/2021) :
+
+- Correction de l'affichage de l'assurance manquante sur le portail
+- Quelques corrections sur les radius
+
+Version 1.0.1.9 (21/11/2021) :
+
+- Amélioration de l'affichage des approbations sur le portail
+- Ajout du rappel des approbations manquantes sur la page réservations du portail
+- Correction du défilement de la grille des conso
+
+Version 1.0.1.8 (19/11/2021) :
+
+- Ajustement de la taille de la vidéo d'accueil
+- Autorise l'utilisation de vidéos Youtube sur la page d'accueil du portail
+- Correction d'un bug sur la génération du PDF de l'état global
+
+Version 1.0.1.7 (19/11/2021) :
+
+- Ajout de la vidéo d'accueil sur le portail
+
+Version 1.0.1.6 (17/11/2021) :
+
+- Ajout des signatures d'emails
+
+Version 1.0.1.5 (17/11/2021) :
+
+- Ajout des dates extrêmes du mois dans l'export pes
+- Changement de FRST à RCUR sur les nouveaux mandats
+
+Version 1.0.1.4 (17/11/2021) :
+
+- Correction de l'affichage des classes dans les inscriptions scolaires
+
+Version 1.0.1.3 (16/11/2021) :
+
+- Ajout du tarif selon le QF dans les cotisations
+- Ajout des colonnes école et classe dans la liste des étapes de scolarité
+- Correction de l'importation multiple des photos individuelles
+
+Version 1.0.1.2 (15/11/2021) :
+
+- Ajout de l'importation multiple de photos individuelles
+- Ajout de la sélection des structures associées à un mandat
+- Correction de la saisie de conso de type quantité sur le portail
+- Correction de l'affichage des périodes de réservations sur le portail
+- Correction de l'auteur dans la saisie d'un album
+
+Version 1.0.1.1 (14/11/2021) :
+
+- Correction de l'affichage du nom de l'utilisateur dans le header
+- Masquer commande signaler un bug si hors mode démo
+
+Version 1.0.1.0 (13/11/2021) :
+
+- Ajout de l'importation des contacts sur le portail
+- Ajout du champ messagerie_active dans les structures
+- Ajout de la gestion de l'affichage des pages du portail
+- Modification des couleurs des cards documents du portail
+
+Version 1.0.0.9 (13/11/2021) :
+
+- Modification des ratios des images des articles
+
+Version 1.0.0.8 (13/11/2021) :
+
+- Ajout des renseignements manquants sur le portail
+- Remplacement de bulk_delete par raw_delete
+
+Version 1.0.0.7 (11/11/2021) :
+
+- Ajout de la rotation du log
+- Ajout de la liste des familles sans inscriptions
+- Ajout de l'arrondi et de la facturation à l'unité dans le tarif selon la durée
+- Correction de l'affichage du prénom si collectivité
+- Correction du focus sur la saisie de l'heure de fin d'une conso horaire
+
+Version 1.0.0.6 (09/11/2021) :
+
+- Ajout de la saisie rapide d'une adhésion
+- Ajout de la copie des tarifs d'un événement existant
+- Correction de l'application d'une semaine-type avec des événements
+- Correction du tri par ordre alpha de la liste des inscriptions
+
+Version 1.0.0.5 (08/11/2021) :
+
+- Ajout des types de dates dans les périodes de réservations
+
+Version 1.0.0.4 (08/11/2021) :
+
+- Ajout de l'importation de contacts dans la fiche individuelle
+- Tri des activités par ordre alpha dans la liste des activités
+- Tri des types de vaccin par ordre alpha dans la saisie des vaccins
+- Tri des classes par niveau dans les inscriptions scolaires du menu Individus
+- Correction d'un bug sur l'affichage des périodes sur le portail
+
+Version 1.0.0.3 (07/11/2021) :
+
+- Ajout de la colonne Catégorie à la liste des infos personnelles dans la fiche individuelle
+
+Version 1.0.0.2 (07/11/2021) :
+
+- Ajout de la liste des individus en doublon dans le menu Individus
+- Ajout de colonnes données associées dans plusieurs listes du menu paramétrage
+
+Version 1.0.0.1 (07/11/2021) :
+
+- Ajout de la liste des informations dans le menu Individus
+
+Version 1.0.0.0 (06/11/2021) :
+
+- Version stable
+- Nettoyage final des migrations
+- Ajout de la semaine-type dans le planning du portail
+- Ajout du récapitulatif dans la liste des conso
+- Ajout de l'affichage des anniversaires dans la liste des conso
+- Ajustement du cadrage automatique des photos importées
+- Correction de divers bugs
+
+Version 0.0.6.0 (24/10/2021) :
+
+- Correction de la migration 34
+
+Version 0.0.5.9 (24/10/2021) :
+
+- Ajout du choix du stockage pour les documents
+- Correction de l'importation des photos sous Linux
+- Correction de divers bugs
+
+Version 0.0.5.8 (23/10/2021) :
+
+- Correction de l'importation des clés gnupg
+- Correction de divers bugs
+
+Version 0.0.5.7 (21/10/2021) :
+
+- Correction de divers bugs
+
+Version 0.0.5.6 (21/10/2021) :
+
+- Envoi des sauvegardes chiffrées vers Dropbox
+- Ajustement de couleurs pour le dark-mode
+- Ajout possible dans des listes du portail
+- Correction de divers bugs
+
+Version 0.0.5.5 (11/10/2021) :
+
+- Correction de divers bugs
+
+Version 0.0.5.4 (10/10/2021) :
+
+- Finalisation des renseignements à traiter
+- Ajout du paramétrage de l'affichage des renseignements sur le portail
+- Traitement manuel des demandes du portail
+- Cryptage de nouveaux champs
+- Correction de divers bugs
+
+Version 0.0.5.3 (28/09/2021) :
+
+- Ajout de la page Documents sur le portail
+- Ajout de l'alerte sur les cotisations manquantes
+- Ajout des pièces libres
+- Diverses corrections
+
+Version 0.0.5.2 (25/09/2021) :
+
+- Ajout du détail des factures sur le portail
+- Ajout de la saisie de documents pour les assurances, infos médicales et quotients
+- Ajustements pour affichage sur smartphone
+
+Version 0.0.5.1 (24/09/2021) :
+
+- Correction du responsive de la grille des conso
+
+Version 0.0.5.0 (22/09/2021) :
+
+- Ajout des unités visibles sur le portail
+- Amélioration des commandes de la grille des conso
+- Amélioration du traitement par lot dans la grille des conso
+- Modification des boutons des notes
+- Diverses corrections
+
+Version 0.0.4.9 (15/09/2021) :
+
+- Ajout du graphique des individus sur le page d'accueil
+- Ajout des messages du portail sur la page d'accueil
+- Finalisation du profil de configuration dans l'éditeur de la liste des consommations
+- Intégration des régimes alimentaires dans la liste des consommations
+- Attribution des paramètres aux utilisateurs
+- Petites corrections diverses
+
+Version 0.0.4.7 (10/09/2021) :
+
+- Ajout de la gestion des images de fond des pages de login
+- Ajout du menu Outils dans la grille des conso
+- Ajout du recalcul des prestations dans le menu Facturation
+- Affichage des conditions d'utilisation dans la page de login du portail
+- Attribution des adresses d'expédition aux utilisateurs et aux structures
+- Petites corrections diverses
+
+Version 0.0.4.6 (06/09/2021) :
+
+- Correction de l'affichage du suivi des inscriptions sur la page d'accueil
+
+Version 0.0.4.5 (06/09/2021) :
+
+- Ajout de la protection des champs ManyToMany
+- Correction de la sélection de la période dans la grille
+- Correction de la suppression des conso dans la grille
+
+Version 0.0.4.4 (02/09/2021) :
+
+- Correction de l'affichage des liens dans la fiche individuelle
+
+Version 0.0.4.3 (27/08/2021) :
+
+- Correction de l'update
+- Correction du logo sur la page de connexion
+
+Version 0.0.4.1 (27/08/2021) :
+
+- Correction de l'installation des données par défaut
+
+Version 0.0.4.0 (26/08/2021) :
+
+- Intégration de la migration initiale
+
+Version 0.0.3.9 (25/08/2021) :
+
+- Ajout du cryptage des données personnelles
+- Ajout du traitement automatique des places en attente
+- Ajout de la pointeuse en temps réel
+- Ajout de l'export ves Magnus
+- Ajout des maladies
+- Ajout des approbations sur le portail
+- Ajout des articles sur le portail
+- Ajout de la banque d'images des articles
+- Ajout des albums photos sur le portail
+- Ajout de la liste des questionnaires dans le menu Individus
+- Ajout de la liste des contacts d'urgence et de sortie dans le menu Individus
+- Ajout de la liste des régimes alimentaires dans le menu Individus
+- Ajout du calendrier mensuel dans le menu Outils
+- Remplacement du captcha dans les pages de connexion
+- Nombreuses améliorations et optimisations
+- Correction de divers bugs
+
+Version 0.0.3.8 (23/06/2021) :
+
+- Ajout de la gestion des mandats SEPA
+- Conversion des messages en notes
+- Fix init gestionnaires des conso
+- Fix suppression d'un individu
+- Divers correctifs
+
+Version 0.0.3.7 (15/06/2021) :
+
+- Ajout des structures
+- Finalisation de l'historique
+- Sécurisation des requetes ajax
+- Correction de bugs divers
+- Ajout de la réinitialisation des mots de passe
+- Ajout des régimes alimentaires
+- Ajout des contacts d'urgence
+
+Version 0.0.3.6 (28/04/2021) :
+
+- Corrections cosmétiques diverses
+
+Version 0.0.3.5 (28/04/2021) :
+
+- Recherche des mises à jour sur Github
+
+Version 0.0.3.4 (28/04/2021) :
+
+- Publication sous licence GNU GPL
+
+Version 0.0.3.3 (25/04/2021) :
+
+- Ajout du favicon
+- Ajout de l'affichage de l'intro démo sur la page d'accueil
+- Ajout du champ titre dans les pièces
+- Ajout de l'affichage des unités de remplissage dans les totaux du gestionnaire des consommations
+- Fix affichage des noms dans l'historique
+- Fix affichage modal Ajouter un individu dans gestionnaire des consommations
+- Fix suppression des filtres de liste
+- Fix affichage des images dans les PDF
+- Fix bulk_delete avec MySQL
+
+Version 0.0.2.5 (14/04/2021) :
+
+- Ajout de l'affichage de la disponibilité d'une mise à jour sur la page d'accueil
+- Amélioration du champ de recherche de la page d'accueil
+- Correction de l'horodatage last_login
+
+Version 0.0.2.4 (11/04/2021) :
+
+- Correction des résultats du suivi des consommations
+
+Version 0.0.2.2 (06/04/2021) :
+
+- Modification affichage du suivi des consommations
+- Correction de l'affichage des heures dans la liste des consommations PDF
+
+Version 0.0.1.9 (05/04/2021) :
+
+- Ajout du détachement des individus
+- Ajout de la liste des individus détachés
+- Upgrade des librairies : bootstrap 4, adminlte 3, opencv-python
+- Changement de source pour l'importation des périodes de vacances
+
+Version 0.0.1.7 (13/03/2021) :
+
+- Ajout de la gestion des droits des utilisateurs
+- Ajout de la page de connexion au portail famille
+- Ajout de la réinitialisation du mot de passe du portail famille
+- Ajout de la barre de commandes standardisée
+- Ajout de la prise en charge des inscriptions simultanées
+- Ajout du système d'inscriptions multiples
+- Suppression du champ parti de la table Inscriptions
+- Finalisation de la liste des individus du menu Individus
+- Finalisation de la grille des conso et du gestionnaire des conso
+- Correction de l'affichage des PDF (changement de src du embed)
+
+Version 0.0.1.6 (31/01/2021) :
+
+- Ajout du paramétrage des événements
+- Ajout de la page des notes de versions
+- Ajout du calendrier récapitulatif des ouvertures dans le paramétrage de l'activité
+- Amélioration du calendrier des ouvertures (scrolling, suppression des toggles)
+- Correction de l'application des tarifs avancés des événements dans la grille des conso
+- Correction du masque dans les champs de saisie d'heures
+
+Version 0.0.1.5 (24/01/2021) :
+
+- Ajout de la duplication des tarifs, des modèles de documents, des modèles d'emails et des modèles de lettres de rappel
+- Correction de la suggestion des codes postaux et des villes (Blocage CSP)
+- Correction de l'affichage des PDF (Blocage CSP et pb sur le nom de fichier)
+- Correction de la sélection des groupes dans le paramétrage des unités de consommation
+- Correction de la sélection de la zone dans l'importation des périodes de vacances
+- Correction du mask dans le tableau des lignes de tarifs
+
+Version 0.0.1.4 (01/11/2020) :
+
+- Ajout du recaptcha
+
+Version 0.0.1.2 (08/10/2020) :
+
+- Ajout du CSP et de Axes
+
+Version 0.0.0.7 (06/10/2020) :
+
+- Fix float TVA dans grille des conso
+
+Version 0.0.0.6 (05/10/2020) :
+
+- Première version beta privée
+
+Version 0.0.0.5 (29/04/2020) :
+
+- Ajout du système de mise à jour
+
+Version 0.0.0.1 (25/07/2019) :
+
+- Version initiale

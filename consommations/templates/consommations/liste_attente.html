@@ -1,0 +1,146 @@
+{% extends "core/page.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% load embed %}
+
+{% block scripts %}
+    {{ block.super }}
+    <script type="text/javascript" src="{% static 'lib/bootbox/bootbox.min.js' %}"></script>
+{% endblock scripts %}
+
+{% block contenu_page %}
+
+    <div class="row">
+        <div class="col-md-3" >
+
+            <!-- Paramètres -->
+            <div class="card card-default">
+                <div class="card-header with-border">
+                    <h3 class="card-title"><i class="fa fa-gear margin-r-5"></i> Paramètres</h3>
+                    <div class="card-tools">
+                        <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Réduire"><i class="fa fa-minus"></i></button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <button type="submit" form="form_parametres" class="btn btn-primary btn-block mb-3" name="type_submit" title="Actualiser les résultats"><i class="fa fa-refresh margin-r-5"></i> Actualiser les résultats</button>
+                    {% crispy form_parametres %}
+                </div>
+            </div>
+
+        </div>
+
+        <div class="col-md-9">
+
+            <div class="card card-default">
+                <div class="card-header with-border">
+                    <h3 class="card-title"><i class="fa fa-caret-square-o-right margin-r-5"></i> Résultats</h3>
+                    <div class="card-tools">
+                        <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Réduire"><i class="fa fa-minus"></i></button>
+                    </div>
+                </div>
+                <div class="card-body">
+
+                    {% if nbre_disponibilites %}
+                        <div class="alert alert-success">
+                            <i class="fa fa-info-circle margin-r-5"></i> Il est possible de réattribuer {{ nbre_disponibilites }} place{{ nbre_disponibilites|pluralize }} disponible{{ nbre_disponibilites|pluralize }} !
+                        </div>
+                    {% endif %}
+
+                    <div class="buttonHolder">
+                        <a class="btn btn-primary" href="{% url 'liste_attente_traitement_automatique' %}" title="L'application va réattribuer les places disponibles et envoyer des emails de notification aux familles concernées"><i class='fa fa-magic margin-r-5'></i>Attribuer les places disponibles</a>
+                        <button class="btn btn-default" id="bouton_attribution_manuelle" title="L'application va réattribuer les places sélectionnées et envoyer des emails de notification aux familles concernées"><i class='fa fa-magic margin-r-5'></i>Attribuer les places cochées</button>
+                    </div>
+
+                    <script>
+                        var contenu_table = JSON.parse('{{ resultats|escapejs }}');
+                        var affiche_pagination = false;
+                    </script>
+
+                    <style>
+                        .case_date {
+                            background-color: #efefef;
+                            font-weight: bold;
+                        }
+                    </style>
+
+                    <table id="table" class="table-sm" data-tree-show-field='label'>
+                        <thead>
+                            <tr>
+                                <th data-field="label" data-halign="center" data-align="left" data-cell-style="formate_case">Individu</th>
+                                <th data-field="unites" data-halign="center" data-align="center" data-cell-style="formate_case">Consommations</th>
+                                <th data-field="date_saisie" data-halign="center" data-align="center" data-cell-style="formate_case">Date de la réservation</th>
+                                <th data-field="action" data-halign="center" data-align="center" data-cell-style="formate_case">Action</th>
+                                <th data-field="select" data-checkbox="true" data-halign="center" data-align="center" data-cell-style="formate_case" data-formatter="stateFormatter">select</th>
+                            </tr>
+                        </thead>
+                    </table>
+
+                    <script>
+                        function formate_case(value, row, index) {
+                            if (row.type === "date") {
+                                return {classes: 'case_date'};
+                            };
+                            return {};
+                        };
+                        function stateFormatter(value, row, index) {
+                            if (!(row.type === "individu")) {
+                                return {
+                                    disabled: true,
+                                }
+                            }
+                            return value
+                        }
+
+                        $("#bouton_attribution_manuelle").on("click",function(event){
+                            // Vérifie qu'une ligne est cochée
+                            if ($("#table").bootstrapTable('getSelections').length === 0) {
+                                toastr.error("Vous devez cocher au moins une ligne dans la liste");
+                                return;
+                            }
+                            // Demande la confirmation du lancement de la procédure
+                            var dlg = bootbox.dialog({
+                                title: "Confirmation",
+                                message: "Confirmez-vous l'attribution des " + $("#table").bootstrapTable('getSelections').length + " places cochées ?",
+                                buttons: {
+                                    ok: {
+                                        label: "<i class='fa fa-check'></i> Réattribuer",
+                                        className: 'btn-primary',
+                                        callback: function(){
+                                            $.ajax({
+                                                type: "POST",
+                                                url: "{% url 'liste_attente_attribution_manuelle' %}",
+                                                data: {
+                                                    selections: JSON.stringify($("#table").bootstrapTable('getSelections')),
+                                                    csrfmiddlewaretoken: "{{ csrf_token }}",
+                                                },
+                                                success: function (data) {
+                                                    bootbox.hideAll();
+                                                    toastr.success("Attribution des places effectuée");
+                                                    location.reload(true);
+                                                },
+                                                error: function(data) {
+                                                    toastr.error(data.responseJSON.erreur);
+                                                }
+                                            });
+
+                                        }
+                                    },
+                                    cancel: {
+                                        label: "<i class='fa fa-ban'></i> Annuler",
+                                        className: 'btn-danger',
+                                    }
+                                }
+                            });
+                        });
+
+                    </script>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    {% include 'core/widgets/bootstrap-table.html' %}
+
+{% endblock contenu_page %}

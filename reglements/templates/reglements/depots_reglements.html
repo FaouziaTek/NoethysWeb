@@ -1,0 +1,99 @@
+{% extends "core/box_in_page.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% load embed %}
+
+
+{% block contenu_page %}
+    <div class="row">
+
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            {% embed 'core/box.html' %}
+                {% block box_titre %}{{ box_titre }}{% endblock %}
+                {% block box_introduction %}{{ box_introduction|safe }}{% endblock %}
+                {% block box_contenu %}
+
+                    {# Boutons de commandes #}
+                    <div class="buttonHolder">
+                        <a class="btn btn-danger" href="{% url 'depots_reglements_liste' %}"><i class='fa fa-times margin-r-5'></i>Fermer</a>
+                        {% if not depot.verrouillage %}
+                            <a class="btn btn-default" href="{% url 'depots_reglements_ajouter_reglement' iddepot=depot.pk %}"><i class='fa fa-plus margin-r-5'></i>Ajouter des règlements</a>
+                        {% endif %}
+                        <a class="btn btn-default" href="{% url 'depots_reglements_modifier' pk=depot.pk %}"><i class="fa fa-pencil margin-r-5"></i>Modifier les paramètres</a>
+                        <button class="btn btn-default" onclick="impression_pdf()" title="Aperçu PDF"><i class='fa fa-file-pdf-o margin-r-5'></i>Aperçu PDF</button>
+                        <a class="btn btn-default" href="{% url 'depots_reglements_envoyer_avis' iddepot=depot.pk %}"><i class="fa fa-send-o margin-r-5"></i>Envoyer les avis de dépôt</a>
+                        <a class="btn btn-default" href="#" target="_blank" title="Consulter l'aide"><i class="fa fa-life-saver margin-r-5"></i>Aide</a>
+                    </div>
+
+                    {# Paramètres du dépôt #}
+                    <div class="card bg-light d-flex flex-fill mb-0 mt-3">
+                        <div class="card-body pt-0 p-3">
+                            <div class="row">
+                                <div class="col-8">
+                                    <h2 class="lead"><b>
+                                        {% if depot.verrouillage %}<span class='text-green' title='Dépôt verrouillé'><i class='fa fa-lock margin-r-5'></i></span>{% endif %}
+                                        {{ depot.nom }}
+                                    </b></h2>
+                                    {% if depot.observations %}
+                                        <div class="text-muted border-bottom-0">
+                                            <div class="mt-1"><span><i class="fa fa-xs fa-info-circle"></i></span> Observations : {{ depot.observations }}</div>
+                                        </div>
+                                    {% endif %}
+                                </div>
+                                <div class="col-4">
+                                    <ul class="ml-4 mb-0 fa-ul text-muted">
+                                        <li class="small"><span><i class="fa fa-xs fa-calendar-times-o"></i></span> Date : {{ depot.date }}</li>
+                                        <li class="small"><span><i class="fa fa-xs fa-calendar-times-o"></i></span> Compte : {{ depot.compte.nom }}</li>
+                                        <li class="small"><span><i class="fa fa-xs fa-calendar-times-o"></i></span> Code compta : {{ depot.code_compta|default:"Non" }}</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <div class="row text-center">
+                                <div class="col-12">{{ stats|safe }}</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {# Liste des règlements #}
+                    {% embed 'core/crud/liste.html' %}
+                    {% endembed %}
+
+                {% endblock box_contenu %}
+                {% block box_conclusion %}{{ box_conclusion }}{% endblock %}
+            {% endembed %}
+        </div>
+
+    </div>
+
+    {# Insertion des modals #}
+    {% include 'core/modal_pdf.html' %}
+
+    <script>
+
+        // Impression du PDF
+        function impression_pdf() {
+            var table = $('.datatable').DataTable()
+            $.ajax({
+                type: "POST",
+                url: "{% url 'ajax_depots_reglements_impression_pdf' %}",
+                data: {
+                    iddepot: {{ depot.pk }},
+                    tri_colonne: $(table.column(table.order()[0][0]).header()).data("code"),
+                    tri_sens: table.order()[0][1],
+                    csrfmiddlewaretoken: '{{ csrf_token }}',
+                },
+                datatype: "json",
+                success: function(data){
+                    charge_pdf(data);
+                },
+                error: function(data) {
+                    toastr.error(data.responseJSON.erreur);
+                }
+            })
+        };
+
+    </script>
+
+{% endblock contenu_page %}

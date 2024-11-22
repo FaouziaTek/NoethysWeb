@@ -1,0 +1,84 @@
+{% extends "core/crud/liste_in_box.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% load embed %}
+
+
+{% block contenu_page %}
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            {% embed 'core/box.html' %}
+                {% block box_titre %}{{ box_titre }}{% endblock %}
+                {% block box_introduction %}{{ box_introduction|safe }}{% endblock %}
+                {% block box_contenu %}
+
+                    <form id="form_selections" method="POST">
+                        <input type="hidden" name="selections" value="">
+                        <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+
+                        <div class="buttonHolder" style="margin-top: 10px;">
+                            <div>
+                                <button class="btn btn-primary btn-primary" id="bouton_valider"><i class="fa fa-check margin-r-5"></i>Valider</button>
+                                <a class="btn btn-danger" href="{% url 'editeur_emails' pk=idmail %}"><i class='fa fa-ban margin-r-5'></i>Annuler</a>
+                            </div>
+                        </div>
+
+                        {% if categorie == "saisie_libre" %}
+                            <textarea rows="10" name="adresses" class="textinput textInput form-control mt-3">{{ adresses }}</textarea>
+                        {% endif %}
+
+                    </form>
+
+                    {% embed 'core/crud/liste.html' %}
+                    {% endembed %}
+
+                    <script type="text/javascript" src="{% static 'lib/bootbox/bootbox.min.js' %}"></script>
+                    <script>
+                        $("#bouton_valider").on("click",function(event) {
+                            $("[name=selections]").val(JSON.stringify(get_coches()));
+
+                            {# Recherche les adresses manquantes #}
+                            var liste_adresses_manquantes = [];
+                            {% if categorie == "individu" or categorie == "famille" or categorie == "contact" %}
+                                var table = new $.fn.dataTable.Api('.datatable');
+                                $.each(table.rows({selected: true}).data().toArray(), function (index, valeurs) {
+                                    {% if categorie == "famille" %}
+                                        if ((valeurs[3] == null) || (valeurs[3] === '') || (valeurs[3] != null && valeurs[3].indexOf("fa-ban") >= 0)) {liste_adresses_manquantes.push(valeurs[2]);};
+                                    {% else %}
+                                        if ((valeurs[4] == null) || (valeurs[4] === '') || (valeurs[4] != null && valeurs[4].indexOf("fa-ban") >= 0)) {liste_adresses_manquantes.push(valeurs[2] + " " + valeurs[3]);};
+                                    {% endif %}
+                                });
+                            {% endif %}
+
+                            {# Affiche les adresses manquantes #}
+                            if (liste_adresses_manquantes.length > 0) {
+                                var dialog = bootbox.dialog({
+                                    title: "Avertissement",
+                                    message: "Les individus suivants ne possèdent pas d'adresses ou ne souhaitent pas recevoir de mails groupés : " + liste_adresses_manquantes.join(", ") + ".",
+                                    buttons: {
+                                        ok: {
+                                            label: "<i class='fa fa-check'></i> Continuer quand même",
+                                            className: 'btn-primary',
+                                            callback: function () {
+                                                $('#form_selections').submit();
+                                            }
+                                        },
+                                        cancel: {
+                                            label: "<i class='fa fa-ban'></i> Annuler",
+                                            className: 'btn-danger',
+                                        }
+                                    }
+                                });
+                                return false;
+                            } else {
+                                $('#form_selections').submit();
+                            };
+                        });
+
+                    </script>
+
+                {% endblock box_contenu %}
+            {% endembed %}
+        </div>
+    </div>
+{% endblock contenu_page %}

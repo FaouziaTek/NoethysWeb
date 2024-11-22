@@ -1,0 +1,47 @@
+{% extends "core/page.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% load embed %}
+
+{% block page_titre %}{{ page_titre }}{% endblock page_titre %}
+
+{% block styles %}
+    {{ block.super }}
+{% endblock styles %}
+
+{% block contenu_page %}
+
+    <script>
+        var dict_options = JSON.parse('{{ data.options_json|escapejs }}');
+    </script>
+
+    <div class="row">
+        <div class="col-md-3" >
+            {% include "consommations/grille_parametres.html" %}
+            {% if data.tarifs_credits_exists %}
+                {% include "consommations/grille_forfaits.html" %}
+            {% endif %}
+            {% include "consommations/grille_facturation.html" %}
+            {% include 'outils/modal_editeur_emails.html' %}
+        </div>
+
+        <div class="col-md-9">
+            {% include "consommations/grille.html" %}
+        </div>
+
+    </div>
+
+{% endblock contenu_page %}
+
+
+{% block scripts %}
+    {{ block.super }}
+    <script>
+        function Get_classes() {return []}
+        function Get_groupes() {return []}
+        function Get_options() {return {}}
+        function Get_mode_parametres() {return null}
+    </script>
+
+{% endblock scripts %}
+

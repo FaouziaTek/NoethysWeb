@@ -1,0 +1,79 @@
+{% load crispy_forms_tags %}
+{% load static %}
+{% load embed %}
+
+<thead>
+    <tr>
+        <th style="width:200px" rowspan="3"></th>
+        {% for colonne in data_suivi_consommations.dict_colonnes.activites %}
+            <th colspan="{{ colonne.nbre_colonnes }}">{{ colonne.activite.nom }}</th>
+        {% endfor %}
+    </tr>
+    <tr>
+        {% for colonne in data_suivi_consommations.dict_colonnes.groupes %}
+            <th colspan="{{ colonne.nbre_colonnes }}">{% if afficher_abreges_groupes and colonne.groupe.abrege %}{{ colonne.groupe.abrege }}{% else %}{{ colonne.groupe.nom }}{% endif %}</th>
+        {% endfor %}
+    </tr>
+    <tr>
+        {% for colonne in data_suivi_consommations.dict_colonnes.unites %}
+            <th colspan="{{ colonne.nbre_colonnes }}">{% if afficher_abreges_unites and colonne.unite.abrege %}{{ colonne.unite.abrege }}{% else %}{{ colonne.unite.nom }}{% endif %}</th>
+        {% endfor %}
+</thead>
+<tbody>
+
+    {% for date in data_suivi_consommations.liste_dates %}
+        <tr>
+            <th class="{% if date|est_en_vacances:data_suivi_consommations.liste_vacances %}vacances{% endif %}">
+                {{ date|date:"l j F Y" }}
+            </th>
+
+            {% for colonne in data_suivi_consommations.dict_colonnes.unites %}
+
+                {# Génération d'une key pour la case #}
+                {% creation_string_key date colonne.unite.pk colonne.groupe.pk as key_case %}
+
+                {% if key_case in data_suivi_consommations.dict_cases %}
+                    {% with data_suivi_consommations.dict_cases|get_item:key_case as info_case %}
+                        {% if info_case.evenements %}
+                            <td class="case ouvert {{ info_case.classe }}" id="{{ key_case }}">
+                                <table class='table table_evenements'><tbody><tr>
+                                    {% for evenement in info_case.evenements %}
+                                        <td class="case ouvert {{ evenement.classe }}" id="event_{{ key_case }}_{{ evenement.pk }}" title="Places initiales : {{ evenement.capacite_max|default:"--- " }}&#013;Places prises : {{ evenement.prises }}&#013;Places restantes : {{ evenement.restantes|default_if_none:"---" }}&#013;&#013;Double-cliquez sur cette case pour&#013;accéder au détail des réservations">
+                                            <span style="font-size: 11px;">{{ evenement.nom|truncatechars:15 }}</span><br>
+                                            <span>{{ evenement.valeur }}</span>
+                                        </td>
+                                    {% endfor %}
+                                </tr></tbody></table>
+                            </td>
+                        {% else %}
+                            <td class="case ouvert {{ info_case.classe }}" id="{{ key_case }}" title="Places initiales : {{ info_case.initiales|default:"--- " }}&#013;Places prises : {{ info_case.prises }}&#013;Places restantes : {{ info_case.restantes|default_if_none:"---" }}{% if 'total' not in info_case.classe %}&#013;&#013;Double-cliquez sur cette case pour&#013;accéder au détail des réservations{% endif %}">
+                                {{ info_case|get_item:'valeur' }}
+                            </td>
+                        {% endif %}
+                    {% endwith %}
+                {% else %}
+                    <td class="case {{ unite.type|lower }} fermeture"></td>
+                {% endif %}
+
+            {% endfor %}
+        </tr>
+
+    {% empty %}
+        Aucune date
+    {% endfor %}
+
+</tbody>
+
+<script>
+    var periode_json = JSON.parse('{{ periode_json|escapejs }}');
+    Set_periode(periode_json);
+    var activites_json = JSON.parse('{{ activites_json|escapejs }}');
+
+    // Accès au détail des consommations du jour
+    $(".ouvert").not(".total").dblclick(function() {
+        var id = $(this).attr('id');
+        window.open("{% url 'detail_consommations' donnee='xxx' %}".replace("xxx", id), "_blank");
+        return false;
+    })
+
+</script>

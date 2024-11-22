@@ -1,0 +1,248 @@
+{% load static i18n %}
+
+{% block scripts %}
+    <style>
+        .bouton-recherche {
+            background: rgba(255, 255, 255, 0.2) !important;
+            border-color: transparent !important;
+            margin-left: 0px !important;
+        }
+        .champ-recherche {
+            border-top-left-radius: 4px;
+            border-bottom-left-radius: 4px;
+        }
+        @media (min-width: 768px) {
+            #recherche_collapse {
+                display: none;
+            }
+        }
+
+
+    </style>
+{% endblock %}
+
+
+<nav class="main-header navbar navbar-expand navbar-dark navbar-lightblue border-bottom-0">
+
+        <!-- Sidebar toggle button-->
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link sidebar-toggle" data-widget="pushmenu" href="#" role="button">
+                    <i class="fa fa-bars"></i>
+                </a>
+            </li>
+            <!-- Navbar Search -->
+            <li class="nav-item">
+                <a class="nav-link" title="Rechercher" data-widget="navbar-search" href="#" role="button">
+                    <i class="fa fa-search"></i>
+                </a>
+                <div class="navbar-search-block">
+                    <form id="form_recherche1" action="{% url 'rechercher' %}" method="GET" class="form-inline" role="search">
+                        {% csrf_token %}
+                        <div class="input-group input-group-sm">
+                            <input id="champ-recherche1" type="text" title="Rechercher une commande, un individu, une famille, un payeur..." name="champ_recherche" class="form-control form-control-navbar champ-recherche" placeholder="Rechercher...">
+                            <div class="input-group-append">
+                                <button class="btn btn-navbar" type="submit">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                                <button class="btn btn-navbar" type="button" data-widget="navbar-search">
+                                    <i class="fa fa-times"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </li>
+
+        {# Champ de recherche #}
+{% comment %}
+        <form id="form_recherche1" action="{% url 'rechercher' %}" method="GET" class="form-inline ml-3" role="search">
+            {% csrf_token %}
+            <div class="input-group input-group-sm">
+                <input id="form-control form-control-navbar" type="text" title="Recherchez une commande, un individu, une famille, un payeur, une adresse..." name="champ_recherche" class="form-control form-control-navbar champ-recherche" placeholder="Rechercher...">
+                <div class="input-group-append">
+                    <button class="btn btn-navbar" type="submit">
+                        <i class="fa fa-search"></i>
+                    </button>
+                </div>
+            </div>
+        </form>
+{% endcomment %}
+
+            {# Historique des recherches #}
+            <li class="nav-item dropdown">
+                <a href="#" class="nav-link" data-toggle="dropdown" title="Historique des recherches"><i class="fa fa-history"></i></a>
+                <ul class="dropdown-menu" role="menu">
+                    {% for item in request.session.historique_recherche %}
+                        <li class="dropdown-item"><a href="{{ item.url }}">{{ item.label }}</a></li>
+                    {% empty %}
+                        <li class="dropdown-item"><a>Historique vide</a></li>
+                    {% endfor %}
+                    <li class="dropdown-divider"></li>
+                    <li class="dropdown-item"><a href="{% url 'historique' %}">Ouvrir l'historique complet</a></li>
+                </ul>
+            </li>
+
+            {# Actions rapides #}
+            <li class="nav-item dropdown">
+                <a href="#" class="nav-link" data-toggle="dropdown" title="Actions rapides"><i class="fa fa-star-o"></i></a>
+                <ul class="dropdown-menu" role="menu">
+                    {% if perms.core.famille_liste %}
+                        <h6 class="dropdown-header"><strong>Individus</strong></h6>
+                        <li class="dropdown-item"><a href="{% url 'famille_ajouter' %}">Ajouter une famille</a></li>
+                    {% endif %}
+                    {% if perms.core.edition_liste_conso or perms.core.gestionnaire_conso or perms.core.liste_attente %}
+                        <li class="dropdown-divider"></li>
+                        <h6 class="dropdown-header"><strong>Consommations</strong></h6>
+                        {% if perms.core.edition_liste_conso %}<li class="dropdown-item"><a href="{% url 'edition_liste_conso' %}">Editer une liste des consommations</a></li>{% endif %}
+                        {% if perms.core.gestionnaire_conso %}<li class="dropdown-item"><a href="{% url 'gestionnaire_conso' %}">Pointer des consommations</a></li>{% endif %}
+                        {% if perms.core.liste_attente %}<li class="dropdown-item"><a href="{% url 'liste_attente' %}">Consulter la liste d'attente</a></li>{% endif %}
+                    {% endif %}
+                    {% if perms.core.factures_generation or perms.core.rappels_generation %}
+                        <li class="dropdown-divider"></li>
+                        <h6 class="dropdown-header"><strong>Facturation</strong></h6>
+                        {% if perms.core.factures_generation %}<li class="dropdown-item"><a href="{% url 'factures_generation' %}">Générer des factures</a></li>{% endif %}
+                        {% if perms.core.rappels_generation %}<li class="dropdown-item"><a href="{% url 'rappels_generation' %}">Générer des lettres de rappel</a></li>{% endif %}
+                    {% endif %}
+                    
+                    <li class="dropdown-divider"></li>
+                    <h6 class="dropdown-header"><strong>Règlements</strong></h6>
+                    {% if perms.core.famille_reglements_ajouter %}<li class="dropdown-item"><a href="#" onclick="$('#modal_regler_facture').modal('show');">Régler une facture</a></li>{% endif %}
+                    {% if perms.core.depots_reglements_liste %}
+                        {% if perms.core.depots_reglements_liste %}<li class="dropdown-item"><a href="{% url 'depots_reglements_liste' %}">Déposer des règlements</a></li>{% endif %}
+                    {% endif %}
+                    {% if perms.core.collaborateur_ajouter or perms.core.planning_collaborateurs %}
+                        <li class="dropdown-divider"></li>
+                        <h6 class="dropdown-header"><strong>Collaborateurs</strong></h6>
+                        {% if perms.core.collaborateur_ajouter %}<li class="dropdown-item"><a href="{% url 'collaborateur_ajouter' %}">Ajouter un collaborateur</a></li>{% endif %}
+                        {% if perms.core.planning_collaborateurs %}<li class="dropdown-item"><a href="{% url 'planning_collaborateurs' %}">Planning des évènements</a></li>{% endif %}
+                    {% endif %}
+                </ul>
+            </li>
+
+
+            {# Messagerie #}
+            {% if liste_messages_non_lus %}
+                <li class="nav-item dropdown">
+
+                    <a class="nav-link" data-toggle="dropdown" href="#" title="Vous avez {{ liste_messages_non_lus|length }} message{{ liste_messages_non_lus|length|pluralize }}">
+                        <i class="fa fa-comments"></i>
+                        <span class="badge badge-danger navbar-badge">{{ liste_messages_non_lus|length }}</span>
+                    </a>
+
+                    <div class="dropdown-menu dropdown-menu-xl dropdown-menu-left">
+                        <span class="dropdown-item dropdown-header text-center">{{ liste_messages_non_lus|length }} nouveau{{ liste_messages_non_lus|length|pluralize:"x" }} message{{ liste_messages_non_lus|length|pluralize }}</span>
+                        <div class="dropdown-divider"></div>
+
+                        {% for message in liste_messages_non_lus %}
+                            <a href="{% url 'messagerie_portail' idfamille=message.famille_id idstructure=message.structure_id %}" class="dropdown-item" title="{{ message.texte|striptags }}">
+                                <div class="media">
+                                    <div class="media-body">
+                                        <h3 class="dropdown-item-title">
+                                            <i class="fa fa-envelope text-danger mr-1"></i> {{ message.famille.nom }}
+                                        </h3>
+                                        <p class="text-xs">{{ message.texte|striptags|truncatechars:55 }}</p>
+                                        <p class="mt-1 text-muted" style="font-size: 10px;"><i class="fa fa-clock-o mr-1"></i>{{ message.date_creation|timesince }} | <i class="fa fa-home mr-1"></i>{{ message.structure }}</p>
+                                    </div>
+                                </div>
+                            </a>
+                            <div class="dropdown-divider"></div>
+                        {% endfor %}
+
+                        <a href="{% url 'messagerie_portail' %}" class="dropdown-item dropdown-footer">
+                            Voir tous les nouveaux messages
+                        </a>
+
+                    </div>
+                </li>
+            {% endif %}
+
+            {% if perms.core.demandes_portail_liste %}
+
+                {# Renseignements à valider #}
+                {% if nbre_renseignements_attente_validation %}
+                    <li class="nav-item dropdown">
+                        <a class="nav-link" href="{% url 'demandes_portail_liste' %}" title="Vous avez {{ nbre_renseignements_attente_validation }} renseignement{{ nbre_renseignements_attente_validation|pluralize }} à valider">
+                            <i class="fa fa-thumbs-up"></i>
+                            <span class="badge badge-warning navbar-badge">{{ nbre_renseignements_attente_validation }}</span>
+                        </a>
+                    </li>
+                {% endif %}
+
+                {# Renseignements à lire #}
+                {% if nbre_renseignements_attente_lecture %}
+                    <li class="nav-item dropdown">
+                        <a class="nav-link" href="{% url 'demandes_portail_liste' %}" title="Vous avez {{ nbre_renseignements_attente_lecture }} renseignement{{ nbre_renseignements_attente_lecture|pluralize }} à lire">
+                            <i class="fa fa-eye"></i>
+                            <span class="badge badge-warning navbar-badge">{{ nbre_renseignements_attente_lecture }}</span>
+                        </a>
+                    </li>
+                {% endif %}
+
+            {% endif %}
+
+        </ul>
+
+        <ul class="navbar-nav ml-auto">
+
+{% comment %}
+            <div class="nav-item form-group" style="margin-top: 5px;">
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" id="customSwitch1">
+                    <label class="custom-control-label" style="font-weight: 400;opacity: 0.5;" for="customSwitch1">Dark Mode</label>
+                </div>
+            </div>
+{% endcomment %}
+
+
+            {# Utilisateur en cours #}
+            <li class="dropdown user user-menu">
+                <a href="#" class="nav-link" data-toggle="dropdown">
+                    <img src="{% static "images/user.png" %}" class="user-image" alt="User Image">
+                    <span class="d-none d-sm-inline">{% firstof request.user.get_full_name request.user request.user.get_short_name %}</span>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-right">
+                    <li class="user-header">
+                        <img src="{% static "images/user.png" %}" class="rounded-circle" alt="User Image">
+                        <p>
+                            {% firstof request.user.get_full_name request.user request.user.get_short_name %}
+                            <small>Dernière connexion le {{ request.user.last_login }}</small>
+                            <small>Utilisateur depuis {{ request.user.date_joined|date:"j F Y" }}</small>
+                        </p>
+                    </li>
+
+                    <!-- Menu Footer-->
+                    <li class="user-footer">
+                        <div class="pull-left">
+                            <a href="{% url 'profil_utilisateur' %}" class="btn btn-default">Profil</a>
+                        </div>
+                        <div class="pull-right">
+                            <a href="{% url 'deconnexion' %}" class="btn btn-danger"><i class="fa fa-power-off margin-r-5"></i>Déconnexion</a>
+                        </div>
+                    </li>
+
+                </ul>
+            </li>
+
+            {# Fullscreen #}
+{% comment %}
+            <li class="nav-item">
+                <a class="nav-link" data-widget="fullscreen" href="#" role="button">
+                    <i class="fa fa-expand"></i>
+                </a>
+            </li>
+{% endcomment %}
+
+            {# Panneau latéral #}
+            <li class="nav-item">
+                <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button" title="Options">
+                    <i class="fa fa-gears"></i>
+                </a>
+            </li>
+
+
+        </ul>
+    </nav>
+</header>
+
+{% include 'reglements/regler_facture.html' %}

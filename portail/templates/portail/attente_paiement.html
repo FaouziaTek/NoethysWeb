@@ -1,0 +1,18 @@
+{% extends "portail/page.html" %}
+{% load i18n %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% load embed %}
+
+{% block contenu_page %}
+    {% embed 'core/box.html' %}
+        {% block box_theme %}card-outline card-lightblue{% endblock %}
+        {% block box_titre %}{{ box_titre }}{% endblock %}
+        {% block box_introduction %}{{ box_introduction|safe }}{% endblock %}
+        {% block box_contenu %}
+            <div class="mb-3">{% blocktrans %}Une fois que vous avez fermé la fenêtre popup du paiement en ligne, cliquez sur le bouton ci-dessous pour rafraîchir la page de la facturation{% endblocktrans %} :</div>
+            <div><a type="button" class="btn btn-primary" href="{% url 'portail_facturation' %}" title="{% trans "Rafraichir la page" %}"><i class="fa fa-fw fa-refresh"></i> {% blocktrans %}Rafraîchir la page{% endblocktrans %}</a></div>
+        {% endblock %}
+    {% endembed %}
+
+{% endblock %}

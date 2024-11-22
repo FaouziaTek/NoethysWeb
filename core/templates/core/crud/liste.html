@@ -1,0 +1,190 @@
+{% load static %}
+{% load embed %}
+
+
+{% block styles %}
+    {{ block.super }}
+    {% embed 'core/widgets/datatableview/styles.html' %}
+    {% endembed %}
+{% endblock styles %}
+
+{% block extra_head %}
+    {{ block.super }}
+    {% embed 'core/widgets/datatableview/extra_head.html' %}
+    {% endembed %}
+{% endblock %}
+
+
+{% block box_contenu %}
+
+    {# Boutons de liste #}
+    <div class="btn-group">
+        {% for bouton in boutons_liste %}
+            <a class="{{ bouton.classe }}" href="{{ bouton.href }}" {% if bouton.onclick %}onclick="{{ bouton.onclick }}"{% endif %}><i class="{{ bouton.icone }} margin-r-5"></i> {{ bouton.label }}</a>
+        {% endfor %}
+    </div>
+
+    {# Filtres de liste #}
+    {% if filtres_liste %}
+        <ul class="todo-list" style="margin-top: 8px;">
+
+                {% for filtre in filtres_liste %}
+                    <li style="padding: 5px;">
+                        <div class="tools pull-right">
+                            <a type="button" class="btn-xs" title="Modifier ce filtre de liste" onclick="modifier_filtrer({{ filtre.idfiltre }})"><i class="fa fa-pencil"></i></a>
+                            <a type="button" class="btn-xs text-danger" title="Supprimer ce filtre de liste" href="{% url 'ajax_supprimer_filtre_liste' idfiltre=filtre.idfiltre %}"><i class="fa fa-trash-o"></i></a>
+                        </div>
+                        <span class="text text-red">
+                            <i class="fa fa-filter text-red margin-r-5"></i> {{ filtre.label_filtre }}
+                        </span>
+                    </li>
+                {% endfor %}
+
+        </ul>
+    {% endif %}
+
+    {% if datatable.colonnes %}
+        {% include "core/widgets/datatableview/customdatatable.html" %}
+    {% else %}
+        {{ datatable }}
+    {% endif %}
+
+    {% if active_deplacements %}
+        <p class="form-text">
+            <small>
+                <i class="fa fa-info-circle"></i> Cliquez sur le numéro ID d'une ligne pour la déplacer verticalement.
+            </small>
+        </p>
+    {% endif %}
+
+    {# Modal filtres de liste #}
+    {% embed 'core/modal.html' %}
+        {% block modal_id %}modal_filtre_liste{% endblock %}
+        {% block modal_titre %}Ajouter un filtre de liste{% endblock %}
+        {% block modal_classe %}modal-lg{% endblock %}
+        {% block modal_body %}
+            <div id="modal_erreurs" class="text-red"></div>
+            <div id="div_form_filtre_liste">
+            </div>
+        {% endblock %}
+    {% endembed %}
+
+<script>
+
+    function ajouter_filtre() {
+        $.ajax({
+            type: "POST",
+            url: "{% url 'ajax_get_form_filtre_liste' %}",
+            data: {
+                view: "{{ view }}",
+                csrfmiddlewaretoken: "{{ csrf_token }}",
+            },
+            success: function(data) {
+                $('#div_form_filtre_liste').html(data.html);
+                $('#modal_filtre_liste .modal-title').html('<strong>Ajouter un filtre de liste</strong>');
+                $('#modal_filtre_liste').modal('show');
+                $('#id_critere_etats').select2({dropdownParent: $('#modal_filtre_liste')});
+                $('#id_critere_etats_inscriptions').select2({dropdownParent: $('#modal_filtre_liste')});
+            },
+            error: function(data) {
+                $("#modal_erreurs").html(data.responseJSON.erreur);
+            }
+        });
+    };
+
+    function modifier_filtrer(idfiltre) {
+        $.ajax({
+            type: "POST",
+            url: "{% url 'ajax_get_form_filtre_liste' %}",
+            data: {
+                view: "{{ view }}",
+                idfiltre: idfiltre,
+                csrfmiddlewaretoken: "{{ csrf_token }}",
+            },
+            success: function(data) {
+                $('#div_form_filtre_liste').html(data.html);
+                $('#modal_filtre_liste .modal-title').html('<strong>Modifier un filtre de liste</strong>');
+                $('#modal_filtre_liste').modal('show');
+            },
+            error: function(data) {
+                $("#modal_erreurs").html(data.responseJSON.erreur);
+            }
+        });
+    };
+
+    function valider_ajout_filtre () {
+        var nom_champ = $('#id_champ').val();
+        var valeurs = {
+            "nom_liste": $('input[name=nom_liste]').val(),
+            "idfiltre": $('input[name=idfiltre]').val(),
+            "label_champ": dict_champs[nom_champ].label,
+            {% if options_filtre %}"options": "{{ options_filtre }}",{% endif %}
+        };
+        $("#filtres_form :input:visible").each(function() {
+            if (this.name.includes("liste_")) {
+                if ($(this).prop("checked")) {
+                    if (this.name in valeurs) {
+                        valeurs[this.name].push($(this).val())
+                    } else {
+                        valeurs[this.name] = [$(this).val()];
+                    };
+                };
+            } else {
+                if (this.name) {valeurs[this.name] = $(this).val()};
+            };
+        });
+        $.ajax({
+            type: "POST",
+            url: "{% url 'ajax_ajouter_filtre_liste' %}",
+            data: {
+                valeurs: JSON.stringify(valeurs),
+                csrfmiddlewaretoken: "{{ csrf_token }}",
+            },
+            datatype: "json",
+            success: function(data){
+                location.reload();
+            },
+            error: function(data) {
+                toastr.error(data.responseJSON.erreur);
+            }
+        })
+    };
+
+    function Actualiser_page_liste() {
+        var table = new $.fn.dataTable.Api('.datatable');
+        var index_page = table.page();
+        table.ajax.reload();
+        table.page(index_page).draw('page');
+    };
+
+    function action_bouton_coche(url) {
+        var listepk = get_coches();
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: {
+                "liste_lignes": JSON.stringify(listepk),
+            },
+            datatype: "json",
+            success: function (data) {
+                Actualiser_page_liste();
+            },
+            error: function(data) {
+                Actualiser_page_liste();
+                toastr.error(data.responseJSON.erreur);
+            }
+        });
+    }
+
+</script>
+{% endblock %}
+
+
+{% block scripts %}
+    {{ block.super }}
+    {% embed 'core/widgets/datatableview/scripts.html' %}
+    {% endembed %}
+    <script type="text/javascript" src="{% static 'django_select2/django_select2.js' %}"></script>
+    <script type="text/javascript" src="{% static 'lib/select2/js/select2.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'lib/select2/js/i18n/fr.js' %}"></script>
+{% endblock scripts %}

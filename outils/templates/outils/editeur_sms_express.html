@@ -1,0 +1,62 @@
+{% load crispy_forms_tags %}
+{% load static %}
+{% load embed %}
+
+
+{% block styles %}
+    <link rel="stylesheet" type="text/css" href="{% static 'lib/select2/css/select2.min.css' %}">
+{% endblock styles %}
+
+
+{% block scripts %}
+    <script type="text/javascript" src="{% static 'django_select2/django_select2.js' %}"></script>
+    <script type="text/javascript" src="{% static 'lib/select2/js/select2.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'lib/select2/js/i18n/fr.js' %}"></script>
+{% endblock scripts %}
+
+{% crispy form %}
+
+<script>
+    $(document).ready(function() {
+
+        $("#bouton_envoyer_sms").on('click', function(event) {
+            bootbox.dialog({
+                title: "Confirmation de l'envoi",
+                message: "Confirmez-vous l'envoi de ce SMS ?",
+                buttons: {
+                    ok: {
+                        label: "<i class='fa fa-check'></i> Envoyer",
+                        className: 'btn-primary',
+                        callback: function(){
+                            envoyer_sms_ajax();
+                        }
+                    },
+                    cancel: {
+                        label: "<i class='fa fa-ban'></i> Annuler",
+                        className: 'btn-danger',
+                    }
+                }
+            });
+        });
+
+        function envoyer_sms_ajax(dialogbox) {
+            var formData = new FormData($("#form_editeur_sms")[0]);
+            formData.append("csrfmiddlewaretoken", "{{ csrf_token }}");
+            $.ajax({
+                type: "POST",
+                url: "{% url 'ajax_envoyer_sms_express' %}",
+                data: formData,
+                contentType: false,
+                processData: false,
+                success: function (data) {
+                    toastr.success(data.message);
+                    $('#modal_editeur_sms').modal('hide');
+                },
+                error: function (data) {
+                    toastr.error(data.message);
+                }
+            });
+        };
+
+    });
+</script>

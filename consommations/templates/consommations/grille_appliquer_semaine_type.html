@@ -1,0 +1,278 @@
+{% load i18n %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% load embed %}
+
+
+{% block styles %}
+    <style>
+        .tableau_semaine_type {
+            text-align: center;
+            vertical-align: middle;
+        }
+        .tableau_semaine_type td {
+            padding: 10px !important;
+        }
+    </style>
+{% endblock styles %}
+
+
+{# Modal Appliquer une semaine type #}
+{% embed 'core/modal.html' with modal_footer=True %}
+    {% block modal_id %}modal_appliquer_semaine_type{% endblock %}
+    {% block modal_titre %}{% blocktrans %}Appliquer une semaine-type{% endblocktrans %}{% endblock %}
+    {% block modal_classe %}{% if data.liste_unites_visibles|length > 2 %}modal-lg{% endif %}{% endblock %}
+    {% block modal_body %}
+        <div id="modal_erreurs" class="text-red"></div>
+        <form id="form_appliquer_semaine_type" method="post">
+            {% csrf_token %}
+            {% crispy form_appliquer_semaine_type %}
+
+            <!-- Tableau de la semaine-type -->
+            <label>{% trans "Semaine-type" %}</label>
+
+            <!-- Toutes les semaines -->
+            <div id='tableau_semaine_type_0'>
+                {% embed 'consommations/grille_semaine_type.html' with num_semaine=0 %}{% endembed %}
+            </div>
+
+            <!-- Une semaine sur deux -->
+            <div id='tableau_semaine_type_1'>
+                <div class="nav-tabs-custom no-margin">
+                    <ul class="nav nav-pills pb-1">
+                        {% for num_semaine in 2|rangelistfrom1 %}
+                            <li class="nav-item">
+                                <a id="tab_sem_{{ num_semaine }}" class="nav-link {% if num_semaine == 1 %}active{% endif %}" href="#tab_{{ num_semaine }}" data-toggle="tab" role="tab">Semaine {{ num_semaine }}</a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                    <div class="tab-content no-padding">
+                        {% for num_semaine in 2|rangelistfrom1 %}
+                            <div class="tab-pane {% if num_semaine == 1 %}show active{% endif %}" id="tab_{{ num_semaine }}">
+                                {% embed 'consommations/grille_semaine_type.html' with num_semaine=num_semaine %}{% endembed %}
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+            <!-- Semaines paires/impaires -->
+            <div id='tableau_semaine_type_2'>
+                <div class="nav-tabs-custom no-margin">
+                    <ul class="nav nav-pills pb-1">
+                        <li class="nav-item">
+                            <a id="tab_sem_4" class="nav-link active" href="#tab_4" data-toggle="tab" role="tab">{% blocktrans %}Semaine paire{% endblocktrans %}</a>
+                        </li>
+                        <li class="nav-item">
+                            <a id="tab_sem_5" class="nav-link" href="#tab_5" data-toggle="tab" role="tab">{% blocktrans %}Semaine impaire{% endblocktrans %}</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content no-padding">
+                        <div class="tab-pane active" id="tab_4">
+                            {% embed 'consommations/grille_semaine_type.html' with num_semaine=4 %}{% endembed %}
+                        </div>
+                        <div class="tab-pane" id="tab_5">
+                            {% embed 'consommations/grille_semaine_type.html' with num_semaine=5 %}{% endembed %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </form>
+    {% endblock %}
+    {% block modal_footer %}
+        <button type="button" class="btn btn-primary" id="bouton_valider_semaine_type"><i class="fa fa-check margin-r-5"></i>{% trans "Valider" %}</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal"><i class='fa fa-ban margin-r-5'></i>{% trans "Annuler" %}</button>
+    {% endblock %}
+{% endembed %}
+
+
+<script>
+$(document).ready(function() {
+
+    // Ajuste les paramètres du daterangepicker
+    $('#modal_appliquer_semaine_type').on('show.bs.modal', function () {
+        {% if data.date_modifiable_min %}
+            $('#id_periode').data('daterangepicker').setStartDate("{{ data.date_modifiable_min|date:'d/m/Y' }}");
+            $('#id_periode').data('daterangepicker').setEndDate("{{ data.date_modifiable_max|date:'d/m/Y' }}");
+            $('#id_periode').data('daterangepicker').minDate = moment("{{ data.date_modifiable_min|date:'Y-m-d' }}");
+            $('#id_periode').data('daterangepicker').maxDate = moment("{{ data.date_modifiable_max|date:'Y-m-d' }}");
+        {% else %}
+            toastr.error("Aucune date n'est modifiable sur la période affichée");
+            return false;
+        {% endif %}
+    });
+
+    $('#id_frequence').on("change", function(e) {
+        if ( $("#id_frequence").val() == 0 ) {
+            $("#tableau_semaine_type_0").show();
+            $("#tableau_semaine_type_1").hide();
+            $("#tableau_semaine_type_2").hide();
+            }
+        if ( $("#id_frequence").val() == 1 ) {
+            $("#tableau_semaine_type_0").hide();
+            $("#tableau_semaine_type_1").show();
+            $("#tableau_semaine_type_2").hide();
+            }
+        if ( $("#id_frequence").val() == 2 ) {
+            $("#tableau_semaine_type_0").hide();
+            $("#tableau_semaine_type_1").hide();
+            $("#tableau_semaine_type_2").show();
+            }
+    });
+    $('#id_frequence').trigger("change");
+
+    // Vérifie les incompatibilités entre unités
+    $("input[name=case_semaine_type]").on("click", function(event){
+        if (this.checked) {
+            var unites_incompatibles = dict_unites[$(this).data("unite")].incompatibilites;
+            $("input[name=case_semaine_type][data-semaine=" + $(this).data("semaine") + "][data-jour=" + $(this).data("jour") + "]:checked").each(function () {
+                if (jQuery.inArray($(this).data("unite"), unites_incompatibles) !== -1) {
+                    $(this).prop("checked", false);
+                };
+            });
+        };
+        $("input[name=unite_" + $(this).data("semaine") + "_" + $(this).data("unite") + "_" + $(this).data("jour") + "_fin]").prop("disabled", !this.checked);
+        $("input[name=unite_" + $(this).data("semaine") + "_" + $(this).data("unite") + "_" + $(this).data("jour") + "_debut]").prop("disabled", !this.checked);
+        $("input[name=unite_" + $(this).data("semaine") + "_" + $(this).data("unite") + "_" + $(this).data("jour") + "_quantite]").prop("disabled", !this.checked);
+    });
+
+    // Fonction Pair/Impair
+    function isPair(chiffre){
+        chiffre = parseInt(chiffre);
+        return ((chiffre & 1)=='0') ? true : false;
+    };
+
+    $("#bouton_valider_semaine_type").on("click", function (event) {
+
+        // Récupération des paramètres
+        var date_debut = $('#id_periode').data('daterangepicker').startDate.format('YYYY-MM-DD');
+        var num_semaine_debut = moment(date_debut, 'YYYY-MM-DD').isoWeek();
+        var date_fin = $('#id_periode').data('daterangepicker').endDate.format('YYYY-MM-DD');
+        var frequence = parseInt($("#id_frequence").val());
+
+        // Récupération des jours de la semaine-type
+        var validation = true;
+        var liste_resultats = [];
+        $("input[name=case_semaine_type]:checked").each(function() {
+            var semaine = parseInt($(this).attr('data-semaine'));
+            var jour = parseInt($(this).attr('data-jour'));
+            var idunite = parseInt($(this).attr('data-unite'));
+            var heure_debut = $("input[name=unite_" + semaine + "_" + idunite + "_" + jour + "_debut]").val();
+            var heure_fin = $("input[name=unite_" + semaine + "_" + idunite + "_" + jour + "_fin]").val();
+            var quantite = $("input[name=unite_" + semaine + "_" + idunite + "_" + jour + "_quantite]").val();
+
+            // Validation des horaires saisis
+            label_erreur = dict_unites[idunite].nom
+
+            if (heure_debut == false) {
+                    toastr.error("L'heure de début de l'unité " + label_erreur + " doit être renseignée");
+                    validation = false; return;
+            }
+            if (heure_debut) {
+                if (dict_unites[idunite].heure_debut_min && dict_unites[idunite].heure_debut_min !== "None" && heure_debut < dict_unites[idunite].heure_debut_min) {
+                    toastr.error("L'heure de début de l'unité " + label_erreur + " doit être supérieure ou égale à " + dict_unites[idunite].heure_debut_min);
+                    validation = false; return;
+                }
+                if (dict_unites[idunite].heure_debut_max && dict_unites[idunite].heure_debut_max !== "None" && heure_debut > dict_unites[idunite].heure_debut_max) {
+                    toastr.error("L'heure de début de l'unité " + label_erreur + " doit être inférieure ou égale à " + dict_unites[idunite].heure_debut_max);
+                    validation = false; return;
+                }
+            }
+
+            if (heure_fin == false) {
+                    toastr.error("L'heure de fin de l'unité " + label_erreur + " doit être renseignée");
+                    validation = false; return;
+            }
+            if (heure_fin) {
+                if (dict_unites[idunite].heure_fin_min && dict_unites[idunite].heure_fin_min !== "None" && heure_fin < dict_unites[idunite].heure_fin_min) {
+                    toastr.error("L'heure de fin de l'unité " + label_erreur + " doit être supérieure ou égale à " + dict_unites[idunite].heure_fin_min);
+                    validation = false; return;
+                }
+                if (dict_unites[idunite].heure_fin_max && dict_unites[idunite].heure_fin_max !== "None" && heure_fin > dict_unites[idunite].heure_fin_max) {
+                    toastr.error("L'heure de fin de l'unité " + label_erreur + " doit être inférieure ou égale à " + dict_unites[idunite].heure_fin_max);
+                    validation = false; return;
+                }
+            }
+            if (heure_debut && heure_fin && heure_debut > heure_fin) {
+                toastr.error("L'heure de fin de l'unité " + label_erreur + " doit être supérieure à l'heure de début");
+                validation = false; return;
+            }
+
+            // Validation de la quantité saisie
+            if ((quantite == false) || ((quantite) && (quantite < 1))) {
+                toastr.error("La quantité de l'unité " + label_erreur + " doit être supérieure ou égale à 1");
+                validation = false; return;
+            }
+
+            // Mémorisation
+            if ((frequence === 0 && semaine === 0) || (frequence === 1 && (semaine === 1 || semaine === 2) ) || (frequence === 2 && (semaine === 4 || semaine === 5) )) {
+                liste_resultats.push({semaine: semaine, jour: jour, unite: idunite, heure_debut: heure_debut, heure_fin: heure_fin, quantite: quantite});
+            };
+        });
+
+        // Stoppe si non validation
+        if (!(validation)) {return false;}
+
+        // Application de la semaine-type
+        touche_clavier = 17;
+        $.each(dict_cases, function (key, case_tableau) {
+            if (case_tableau.date >= date_debut && case_tableau.date <= date_fin && !(case_tableau.type_case === "evenement") && !(case_tableau.type_case === "multi")) {
+                var datejs = moment(case_tableau.date, 'YYYY-MM-DD');
+                var jour_case = datejs.isoWeekday() - 1;
+                var num_semaine_case = datejs.isoWeek();
+
+                // Recherche si la case est dans la liste des résultats
+                var valide = false;
+                var data = {};
+                for (var i = 0; i < liste_resultats.length; i++) {
+                    if (liste_resultats[i].jour === jour_case && liste_resultats[i].unite === case_tableau.unite) {
+                        // Data à envoyer à la fonction Ajouter
+                        if (liste_resultats[i].heure_debut) {data["heure_debut"] = liste_resultats[i].heure_debut}
+                        if (liste_resultats[i].heure_fin) {data["heure_fin"] = liste_resultats[i].heure_fin}
+                        if (liste_resultats[i].quantite) {data["quantite"] = liste_resultats[i].quantite}
+
+                        // Toutes les semaines
+                        if (frequence === 0) {
+                            valide = true;
+                        }
+                        // 1 semaine sur 2
+                        if (frequence === 1 && ((isPair(liste_resultats[i].semaine) !== isPair(num_semaine_case)) === isPair(num_semaine_debut))) {
+                            valide = true;
+                        }
+                        // Semaines paires/impaires
+                        if (frequence === 2 && isPair(liste_resultats[i].semaine) === isPair(num_semaine_case)) {
+                            valide = true;
+                        }
+                    }
+                }
+
+                // Application réservation
+                if (!(mode === "portail") || (afficher_facturation === true)) {
+                    var active_facturation = true;
+                } else {
+                    var active_facturation = false;
+                }
+                if (valide === true) {
+                    if (case_tableau.has_conso()) {
+                        case_tableau.modifier_conso(data=data, maj_facturation=active_facturation);
+                    } else {
+                        case_tableau.ajouter(data=data, maj_facturation=active_facturation);
+                    }
+                    cases_touchees.push(case_tableau.key);
+                } else {
+                    if (case_tableau.consommations.length > 0) {
+                        case_tableau.supprimer(maj_facturation=active_facturation);
+                        cases_touchees.push(case_tableau.key);
+                    }
+                }
+            }
+        });
+        touche_clavier = null;
+
+        $('#modal_appliquer_semaine_type').modal('hide');
+
+    });
+
+});
+</script>

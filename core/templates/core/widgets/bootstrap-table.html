@@ -1,0 +1,159 @@
+{% load static %}
+
+
+{% block styles %}
+    <link rel="stylesheet" type="text/css" href="{% static 'lib/bootstrap-table/bootstrap-table.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'lib/jquery-treegrid/css/jquery.treegrid.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'lib/bootstrap-table/extensions/fixed-columns/bootstrap-table-fixed-columns.min.css' %}">
+    
+    <style>
+        .case_regroupement {
+            background-color: #efefef;
+            font-weight: bold;
+        }
+        #table td {
+            padding: 3px;
+        }
+    </style>
+    
+{% endblock styles %}
+
+{% block scripts %}
+    <script type="text/javascript" src="{% static 'lib/bootstrap-table/bootstrap-table.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'lib/jquery-treegrid/js/jquery.treegrid.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'lib/bootstrap-table/locale/bootstrap-table-fr-FR.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'lib/bootstrap-table/extensions/print/bootstrap-table-print.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'lib/bootstrap-table/extensions/fixed-columns/bootstrap-table-fixed-columns.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'lib/bootstrap-table/extensions/export/bootstrap-table-export.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'lib/bootstrap-table/extensions/treegrid/bootstrap-table-treegrid.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'lib/table-export/tableExport.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'lib/table-export/libs/jsPDF/jspdf.umd.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'lib/table-export/libs/js-xlsx/xlsx.core.min.js' %}"></script>
+
+    <script>
+    $(document).ready(function() {
+        var $table = $('#table');
+
+        $(function () {
+
+            $table.bootstrapTable({
+                locale: "fr-FR",
+                exportDataType: $(this).val(),
+                exportTypes: ['json', 'xml', 'csv', 'txt', 'png', 'doc', 'xlsx', 'pdf'],
+                exportOptions: {
+                    fileName: function () {
+                        return "export"
+                    },
+                    excelstyles: ['background-color', 'color', 'font-size', 'font-weight'],
+                },
+                // iconSize: 'md',
+                iconsPrefix: 'fa',
+                icons: {
+                    refresh: 'fa-refresh',
+                    columns: 'fa-th-list',
+                    fullscreen: 'fa-arrows-alt',
+                    toggleOn: 'fa-toggle-on',
+                    toggleOff: 'fa-toggle-on',
+                    print: 'fa-print',
+                    export: 'fa-share-square-o',
+                },
+                data: contenu_table,
+                toolbar: "#toolbar",
+                showRefresh: true,
+                search: true,
+                showToggle: true,
+                showFullscreen: true,
+                showColumns: true,
+                showColumnsToggleAll: true,
+                showPrint: true,
+                printAsFilteredAndSortedOnUI: true,
+                showExport: true,
+                clickToSelect: true,
+                pagination: typeof affiche_pagination == 'undefined' ? true : affiche_pagination,
+                pageList: "[10, 25, 50, 100, all]",
+                showExtendedPagination: true,
+                pageSize: 25,
+                // showFooter: true,
+                sortable: true,
+                fixedColumns: true,
+                fixedNumber: 1,
+                // treeShowField: '0',
+                parentIdField: 'pid',
+                printPageBuilder: function (table) {
+                    return `
+                        <html>
+                        <head>
+                        <style type="text/css" media="print">
+                            @page {
+                                size: auto;
+                                margin: 25px 0 25px 0;
+                            }
+                        </style>
+                        <style type="text/css" media="all">
+                            table {
+                                border-collapse: collapse;
+                                font-size: 12px;
+                            }
+                            table, th, td {
+                                border: 1px solid grey;
+                            }
+                            th, td {
+                                text-align: center;
+                                vertical-align: middle;
+                            }
+                            p {
+                                font-weight: bold;
+                                margin-left:20px;
+                            }
+                            table {
+                                width:94%;
+                                margin-left:3%;
+                                margin-right:3%;
+                            }
+                            div.bs-table-print {
+                                text-align:center;
+                            }
+                            .titre {
+                                text-align: center;
+                                vertical-align: middle;
+                            }
+                            ${get_css_ligne()}
+                        </style>
+                        </head>
+                        <title>{{ titre|default:'Impression de la liste' }}</title>
+                        <body>
+                            <h4 class="titre">{{ titre }}</h4>
+                            <div class="bs-table-print">${table}</div>
+                        </body>
+                    </html>`},
+                onResetView: function(data) {
+                    $table.treegrid({
+                        initialState: typeof tree_state == 'undefined' ? "expanded" : tree_state,
+                        treeColumn: 0,
+                        onChange: function() {
+                            $table.bootstrapTable('resetWidth');
+                        }
+                    });
+                }
+            })
+            $('.fixed-table-toolbar input[type="text"]').
+                attr('placeholder', 'Rechercher...').
+                css({'width':'180px', 'border-radius': '3px'});
+
+            function get_css_ligne() {
+                var texte_styles = ""
+                // Ajoute css aux lignes de regroupement durant l'impression
+                $.each(contenu_table, function (index, ligne) {
+                    if (ligne.regroupement === true) {
+                        texte_styles += "tbody tr:nth-child(" + (index+1) + ") {background-color: #efefef;font-weight: bold;-webkit-print-color-adjust: exact;} "
+                    }
+                })
+                return texte_styles
+            }
+
+        })
+
+    });
+    </script>
+
+{% endblock scripts %}
